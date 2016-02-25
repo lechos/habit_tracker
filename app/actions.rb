@@ -26,8 +26,8 @@ post '/profile/signin' do
     email: params[:email],
     password: params[:password]
     )
-  if @user
-    session[:user_id] = @user.id
+  if @user    # user not falsey
+    session[:user_id] = @user.id    # setting session hash values 
     session[:email] = @user.email
     session[:first_name] = @user.first_name
     redirect "/"
@@ -42,8 +42,8 @@ get '/profile/signout' do
   redirect '/'
 end
 
-get "/profile/:id" do
-  @habit = Habit.find_by(user_id: :id)
+get "/profile" do
+  @habit = Habit.where(user_id: @user_id)  # get params from url via get.
   erb :profile
 end
 
