@@ -44,8 +44,8 @@ get '/profile/signout' do
   redirect '/'
 end
 
-get "/profile/:id" do
-  @habits = Habit.where(user_id: params[:id])
+get "/profile" do
+  @habits = Habit.where(user_id: @user_id)
   erb :profile
 end
 

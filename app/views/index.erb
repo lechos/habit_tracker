@@ -5,15 +5,17 @@
 <q>We become what we repeatedly do.</q>
 
 <% if current_user %>
-<br>
-<br>
-  <a href="/profile/<%= @user_id%>">Get Started</a>
+  <br>
+  <br>
+  <a href="/profile">Get Started</a>
 <% else %>
-<form action="/profile/signin" method="post">
-  Email: <input type="text" name="email" value="testuser@gmail.com" /><br />
-  Password: <input type="password" name="password" value="password" /><br />
-  <input type="submit" value="Sign In" />
-</form>
+  <form action="/profile/signin" method="post">
+    <label for="email">Email: </label> 
+    <input type="text" name="email" id="email" value="testuser@gmail.com"><br>
+    <label for="password">Password: </lable>
+    <input type="password" name="password" value="password"><br>
+    <input type="submit" value="Sign In">
+  </form>
 <p><a href="/new_account">Create New Account</a></p>
 <% end %>
 
