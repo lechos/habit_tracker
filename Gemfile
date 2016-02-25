@@ -3,7 +3,7 @@ source "https://rubygems.org"
 
 gem 'rake'
 gem 'activesupport'
-gem ‘byebug’
+gem 'byebug'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
