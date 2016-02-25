@@ -1,5 +1,5 @@
 class AddPasswordToUsers < ActiveRecord::Migration
   def change
-    add_column :habits, :password, :string
+    add_column :users, :password, :string
   end
 end

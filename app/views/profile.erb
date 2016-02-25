@@ -1,13 +1,17 @@
 <h1>Welcome <%= session["first_name"] %></h1>
 
 <form method="GET" action="/profile/signout">
-  <input type="submit" name="signout">
+  <input type="submit" value="signout">
 </form>
 
-<% @habit.each do |habit| %>
-  <div>
-    <p><%= habit.name %></p>
-  </div>
+<% if @habit != nil %>
+  <% @habit.each do |habit| %>
+    <div>
+      <p><%= habit.name %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>You don't have any habits</p>
 <% end %>
 
 <div>
