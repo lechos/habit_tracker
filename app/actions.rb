@@ -1,9 +1,23 @@
+helpers do
+  def current_user
+    @user_id = session["user_id"] if session["user_id"]
+  end
+
+  def flash
+    session[:flash] = "Invalid information" if session[:flash]
+  end
+end
+
+before do
+  current_user
+  flash
+end
+
 get '/' do
   erb :index
 end
 
 get '/form' do
-
   erb :form
 end
 
@@ -12,13 +26,15 @@ post '/profile/signin' do
     email: params[:email],
     password: params[:password]
     )
-  if @user != nil
-    session["user_id"] = @user.id
-    session["email"] = @user.email
-    session["first_name"] = @user.first_name
-    redirect "/profile/1"
-  end
+  if @user
+    session[:user_id] = @user.id
+    session[:email] = @user.email
+    session[:first_name] = @user.first_name
     redirect "/"
+  else
+    session[:flash] = "Invalid information"
+    redirect "/"
+  end
 end
 
 get '/profile/signout' do
@@ -26,7 +42,7 @@ get '/profile/signout' do
   redirect '/'
 end
 
-get "/profile/1" do
+get "/profile/:id" do
   @habit = Habit.find_by(user_id: :id)
   erb :profile
 end

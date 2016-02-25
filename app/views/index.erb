@@ -2,13 +2,19 @@
 
 <p>Develop a new habit in three weeks.</p>
 
-<q>"We become what we repeatedly do."</q>
+<q>We become what we repeatedly do.</q>
 
+<% if current_user %>
+<br>
+<br>
+  <a href="/profile/:id">Get Started</a>
+<% else %>
 <form action="/profile/signin" method="post">
   <input type="hidden" />
   Email: <input type="text" name="email" value="testuser@gmail.com" /><br />
   Password: <input type="password" name="password" value="password" /><br />
-  <input type="submit" value="Log In" />
+  <input type="submit" value="Sign In" />
 </form>
-
 <p><a href="/new_account">Create New Account</a></p>
+<% end %>
+
