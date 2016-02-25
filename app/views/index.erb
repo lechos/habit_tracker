@@ -7,10 +7,9 @@
 <% if current_user %>
 <br>
 <br>
-  <a href="/profile/:id">Get Started</a>
+  <a href="/profile/<%= @user_id%>">Get Started</a>
 <% else %>
 <form action="/profile/signin" method="post">
-  <input type="hidden" />
   Email: <input type="text" name="email" value="testuser@gmail.com" /><br />
   Password: <input type="password" name="password" value="password" /><br />
   <input type="submit" value="Sign In" />
