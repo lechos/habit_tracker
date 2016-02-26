@@ -1,7 +1,7 @@
 <!--
 <script>
 function validateForm() {
-  var days = document.getElementById("start_in_days").value;
+  var days = document.getElementById("form_form2").value;
   if(days == null || days == "") {
     alert("# of days must be filled out.");
     return false;
@@ -18,14 +18,21 @@ function validateForm() {
 }
 </script>
 -->
+
+<div id="form_bg">
+  <img id="form_image" src= "../images/tumblr_nhggel1Hvs1teue7jo1_1280.jpg">
+</div>
+<div id="form_background">
+</div>
+
 <%= erb :show_flash %>
 
 ​
 <form id="add_habit" method="POST", action="/profile/decision">
 
-  <q>I, <%= session[:first_name] %> <%= session[:last_name] %>, would like to develop the habit of 
-    <input type="text" id="habit_name" name="habit_name" value="<%= if @habit_name; @habit_name; end %>"> starting 
-    <input type="text" id="start_in_days" name="start_in_days" list="days">
+  <q id="form_font">I, <%= session[:first_name] %> <%= session[:last_name] %>, would like to develop the habit of <br>
+    <input id="form_form1" type="text" name="habit_name" value="<%= if @habit_name; @habit_name; end %>"> starting 
+    <input id="form_form2" type="text" name="start_in_days" list="days" size="3">
     <datalist id="days">
       <option value="0">Today</option>
       <option value="1">1</option>
@@ -37,8 +44,8 @@ function validateForm() {
     </datalist> day(s) from now
   </q>
   <br>
-    <input type="submit" name="committed" value="I'm Commited!">
-    <input type="submit" name="changed_mind" value="never mind..">
+    <input id="form_form3" type="submit" name="committed" value="I'm Commited!">
+    <input id="form_form4" type="submit" name="changed_mind" value="Never mind..">
 </form>
 
 
