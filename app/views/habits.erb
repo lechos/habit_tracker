@@ -1,7 +1,7 @@
 <h1><%= @habit.name %></h1>
 
 
-<form action="/habits" method="POST">
+<form action="/habits/<%= @habit.id %>" method="POST">
   <strong><p>Week 1</p></strong>
   <strong><p>Start</p></strong>
   <input type="submit" value="Save">

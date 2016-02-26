@@ -22,35 +22,35 @@ helpers do
   end
 
   def update_day_result
-    Day.all.each {|x| x.update(result:"F")}
+    Day.where(habit_id: params[:id]).each {|x| x.update(result:"F")}
     position = 0
     loop do
       position += 1
         if params["#{position}"]
-          true_day = Day.find_by(position: position)
-          true_day.update(result: params["#{position}"])
-          true_day.save
+          day = Day.find_by(position: position, habit_id: params[:id])
+          day.update(result: "T")
+          day.save
         end
       break if position == 21
     end
   end
 
   def week1_success_rate(habit_id)
-    week1 = Day.where(habit_id: 8, position:(1..7), result:"T")
+    week1 = Day.where(habit_id: habit_id, position:(1..7), result:"T")
     number_success = week1.count
     rate = number_success/7.0*100
     rate.round(2)
   end
 
   def week2_success_rate(habit_id)
-    week1 = Day.where(habit_id: 8, position:(8..14), result:"T")
+    week1 = Day.where(habit_id: habit_id, position:(8..14), result:"T")
     number_success = week1.count
     rate = number_success/7.0*100
     rate.round(2)
   end
 
   def week3_success_rate(habit_id)
-    week1 = Day.where(habit_id: 8, position:(15..21), result:"T")
+    week1 = Day.where(habit_id: habit_id, position:(15..21), result:"T")
     number_success = week1.count
     rate = number_success/7.0*100
     rate.round(2)
@@ -112,15 +112,15 @@ post '/profile/decision' do
   end
 end
 
-get '/habits' do
-  @habit = Habit.find(8)
-  @week1 = Day.where(habit_id: 8, position:(1..7))
-  @week2 = Day.where(habit_id: 8, position:(8..14))
-  @week3 = Day.where(habit_id: 8, position:(15..21))
+get '/habits/:id' do
+  @habit = Habit.find(params[:id])
+  @week1 = Day.where(habit_id: params[:id], position:(1..7))
+  @week2 = Day.where(habit_id: params[:id], position:(8..14))
+  @week3 = Day.where(habit_id: params[:id], position:(15..21))
   erb :'habits'
 end
 
-post '/habits' do
+post '/habits/:id' do
   update_day_result
-  redirect '/habits'
+  redirect "/habits/#{params[:id]}"
 end
