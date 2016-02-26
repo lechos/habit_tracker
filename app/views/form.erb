@@ -1,3 +1,9 @@
+<div id="form_bg">
+  <img id="form_image" src= "../images/tumblr_nhggel1Hvs1teue7jo1_1280.jpg">
+</div>
+<div id="form_background">
+</div>
+
 <script>
 function validateForm() {
   var decision = document.forms["add_habit"]["decision"].value;
@@ -24,9 +30,9 @@ function validateForm() {
 ​
 <form id="add_habit" method="POST", action="/profile/decision", onsubmit="return validateForm()">
 
-  <q>I, <%= session[:first_name] %> <%= session[:last_name] %>, would like to develop the habit of 
-    <input type="text" name="habit_name"> starting 
-    <input type="text" name="start_in_days" list="days">
+  <q id="form_font">I, <%= session[:first_name] %> <%= session[:last_name] %>, would like to develop the habit of <br>
+    <input id="form_form1" type="text" name="habit_name"> starting 
+    <input id="form_form2" type="text" name="start_in_days" list="days" size="3">
     <datalist id="days">
       <option value="0">Today</option>
       <option value="1">1</option>
@@ -37,8 +43,8 @@ function validateForm() {
       <option value="6">A Week</option> 
     </datalist> day(s) from now</q>
   <br>
-    <input type="submit" name="decision" value="I'm Commited">
-    <input type="submit" name="decision" value="I Changed My Mind">
+    <input id="form_form3" type="submit" name="decision" value="I'm Commited">
+    <input id="form_form4" type="submit" name="decision" value="I Changed My Mind">
 </form>
 
 
