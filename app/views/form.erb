@@ -1,37 +1,37 @@
+<!--
+<script>
+function validateForm() {
+  var days = document.getElementById("form_form2").value;
+  if(days == null || days == "") {
+    alert("# of days must be filled out.");
+    return false;
+  }
+  else if(isNaN(days)) {
+    alert("# of days must be a number.");
+    return false;
+  }
+  else if(days < 0 || (days % 1 !== 0)) {
+    alert("# of days must be a positive whole number.");
+    return false;
+  }
+  else return true;
+}
+</script>
+-->
+
 <div id="form_bg">
   <img id="form_image" src= "../images/tumblr_nhggel1Hvs1teue7jo1_1280.jpg">
 </div>
 <div id="form_background">
 </div>
 
-<script>
-function validateForm() {
-  var decision = document.forms["add_habit"]["decision"].value;
-  var days = document.forms["add_habit"]["start_in_days"].value;
+<%= erb :show_flash %>
 
-  if(decision == "I'm Commited") {
-    if(days == null || days == "") {
-      alert("# of days must be filled out.");
-      return false;
-    }
-    else if(isNaN(days)) {
-      alert("# of days must be a number.");
-      return false;
-    }
-    else if(days < 0 || (days % 1 !== 0)) {
-      alert("# of days must be a positive whole number.");
-      return false;
-    }
-    else return true;
-  }
-  else return true;
-}
-</script>
 ​
-<form id="add_habit" method="POST", action="/profile/decision", onsubmit="return validateForm()">
+<form id="add_habit" method="POST", action="/profile/decision">
 
   <q id="form_font">I, <%= session[:first_name] %> <%= session[:last_name] %>, would like to develop the habit of <br>
-    <input id="form_form1" type="text" name="habit_name"> starting 
+    <input id="form_form1" type="text" name="habit_name" value="<%= if @habit_name; @habit_name; end %>"> starting 
     <input id="form_form2" type="text" name="start_in_days" list="days" size="3">
     <datalist id="days">
       <option value="0">Today</option>
@@ -41,10 +41,11 @@ function validateForm() {
       <option value="4">4</option>
       <option value="5">5</option>
       <option value="6">A Week</option> 
-    </datalist> day(s) from now</q>
+    </datalist> day(s) from now
+  </q>
   <br>
-    <input id="form_form3" type="submit" name="decision" value="I'm Commited">
-    <input id="form_form4" type="submit" name="decision" value="I Changed My Mind">
+    <input id="form_form3" type="submit" name="committed" value="I'm Commited!">
+    <input id="form_form4" type="submit" name="changed_mind" value="Never mind..">
 </form>
 
 
@@ -53,4 +54,4 @@ function validateForm() {
 
 
 <!-- <input type="radio" name="type_of_habit" value="create">(create)/
-<input type="radio" name="type_of_habit" value="break">(break)   -->
+<input type="radio" name="type_of_habit" value="break">(break)   

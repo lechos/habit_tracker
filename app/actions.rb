@@ -1,4 +1,5 @@
 helpers do
+
   def current_user
     @user_id = session[:user_id] if session[:user_id]
   end
@@ -6,6 +7,15 @@ helpers do
   def check_flash
     @flash = session[:flash] if session[:flash]
     session[:flash] = nil
+  end
+
+  def repopulate_habit_name
+    @habit_name = session[:habit_name] if session[:habit_name]
+    session[:habit_name] = nil
+  end
+
+  def positive_integer?(str)
+    /\A[+]?\d+\z/.match(str) ? true : false
   end
 
   def create_21_days
@@ -67,6 +77,7 @@ get '/' do
 end
 
 get '/form' do
+  repopulate_habit_name
   erb :form
 end
 
@@ -99,23 +110,47 @@ get '/profile/signout' do
 end
 
 get "/profile" do
-  @habits = Habit.where(user_id: @user_id)
+  @habits = Habit.where(user_id: @user_id).order(start_date: :desc)
   erb :profile
 end
 
 post '/profile/decision' do
-  if params[:decision] == "I Changed My Mind"
-    redirect "/profile"
+  # CZ: Redirect to profile page if user is in /form, and clicked "I Changed My Mind"
+
+  if params[:committed].nil?
+    redirect "/profile" 
   else
-    @habit = Habit.new(
-      name: params[:habit_name],
-      user_id: session[:user_id],
-      start_date: Date.today + params[:start_in_days].to_i
+    # CZ: Check if "days_from_now" is positive integer
+    # CZ: (todo - DRY code)
+    if params[:habit_name].nil? || params[:habit_name] == "" || (params[:habit_name].length < 3)
+      session[:flash] = "Habit name cannot be less than 3 characters."
+      session[:habit_name] = params[:habit_name]
+      redirect "/form"
+    elsif params[:start_in_days].nil? || params[:start_in_days] == ""
+      session[:flash] = "Start in days can not be empty."
+      session[:habit_name] = params[:habit_name]
+      redirect "/form"
+    elsif positive_integer?(params[:start_in_days]) == false
+      session[:flash] = "Start in days must be a positive whole number."
+      session[:habit_name] = params[:habit_name]
+      redirect "/form"
+    else
+      @habit = Habit.new(
+        name: params[:habit_name],
+        user_id: session[:user_id],
+        start_date: Date.today + params[:start_in_days].to_i
       )
-    @habit.save
-    create_21_days
-    redirect "/profile"
+      @habit.save
+      create_21_days
+      redirect "/profile"
+    end
   end
+end
+
+# CZ: deletes a profile given user_id, habit_id. called from profile.erb
+post '/profile/delete' do
+  Habit.where(user_id: session[:user_id]).where(id: params[:habit_id]).destroy_all
+  redirect "/profile"
 end
 
 get '/habits/:id' do

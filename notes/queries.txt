@@ -1,0 +1,2 @@
+@h = Habit.where(user_id: session[:user_id]).where(id: params[:habit_id])
+@d = Day.where(habit_id: params[:habit_id])
