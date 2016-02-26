@@ -51,7 +51,7 @@ end
 
 post '/profile/decision' do
   if params[:decision] == "I Changed My Mind"
-    redirect "/profile/:id"
+    redirect "/profile"
   else
     @habit = Habit.new(
       name: params[:habit_name],
@@ -59,6 +59,6 @@ post '/profile/decision' do
       start_date: Date.today + params[:start_in_days].to_i
       )
     @habit.save
-    redirect "/profile/:id"
+    redirect "/profile"
   end
 end
