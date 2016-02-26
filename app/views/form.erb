@@ -1,19 +1,29 @@
 <script>
 function validateForm() {
-  var x = document.forms["update_habit_days"]["start_in_days"].value;
-  if(x < 0) {
-    alert("Days must be greater than 0");
-    return false;
+  var decision = document.forms["add_habit"]["decision"].value;
+  var days = document.forms["add_habit"]["start_in_days"].value;
+
+  if(decision == "I'm Commited") {
+    if(days == null || days == "") {
+      alert("# of days must be filled out.");
+      return false;
+    }
+    else if(isNaN(days)) {
+      alert("# of days must be a number.");
+      return false;
+    }
+    else if(days < 0 || (days % 1 !== 0)) {
+      alert("# of days must be a positive whole number.");
+      return false;
+    }
+    else return true;
   }
-  else if(isNaN(x)) {
-    alert("Days must be a number");
-    return false;
-  }
-  return true;
+  else return true;
 }
 </script>
+​
+<form id="add_habit" method="POST", action="/profile/decision", onsubmit="return validateForm()">
 
-<form id="update_habit_days" method="POST", action="/profile/decision", onsubmit="validateForm()">
   <q>I, <%= session[:first_name] %> <%= session[:last_name] %>, would like to develop the habit of 
     <input type="text" name="habit_name"> starting 
     <input type="text" name="start_in_days" list="days">

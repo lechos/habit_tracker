@@ -17,3 +17,8 @@
   min-height: 50%;
   -webkit-filter: blur(2px) opacity(75%);
 }
+
+.container {
+  width: 75%;
+  margin-top: 100px;
+}
