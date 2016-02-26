@@ -1,7 +1,7 @@
-<h1>Welcome <%= session[:first_name] %></h1>
-
+<div class="row center"><h3>Welcome <%= session[:first_name] %></h3>
+<br>
 <form method="GET" action="/profile/signout">
-  <input type="submit" value="signout">
+  <button><input type="submit" value="signout"></button>
 </form>
 
 <% if @habit %>
@@ -11,9 +11,12 @@
     </div>
   <% end %>
 <% else %>
-  <p>You don't have any habits</p>
+<br>
+<br>
+  <p>You are not tracking any habits</p>
 <% end %>
+<br>
 
-<div>
-  <a href="/form"><p>Add New Habit</p></a>
+<div class="row center">
+  <a href="/form"><p>Create</p></a>
 </div>

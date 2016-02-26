@@ -1,13 +1,18 @@
-<h1>Form a Habit</h1>
+<br>
+<br>
+<br>
+<h1 class="center-align">Habit Changer</h1>
 
-<p>Develop a new habit in three weeks.</p>
+<div class="row center"><h5>Develop a habit in three weeks.</h5></div>
+<br>
+<br>
 
-<q>We become what we repeatedly do.</q>
+<div class="row center"><q>We become what we repeatedly do.</q></div>
 
 <% if current_user %>
 <br>
 <br>
-  <a href="/profile/:id">Get Started</a>
+  <div class="row center"><a href="/profile/:id">Get Started</a></div>
 <% else %>
 <form action="/profile/signin" method="post">
   <input type="hidden" />
