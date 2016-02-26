@@ -1,16 +1,82 @@
-<h1><%= @habit.name %></h1>
+<h1 class="habit-title"><%= @habit.name %></h1>
+
+<script src="/js/pie-chart.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#demo-pie-1').pieChart({
+            barColor: '#3bb2d0',
+            trackColor: '#eee',
+            lineCap: 'round',
+            lineWidth: 8,
+            onStep: function (from, to, percent) {
+                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+            }
+        });
+
+        $('#demo-pie-2').pieChart({
+            barColor: '#fbb03b',
+            trackColor: '#eee',
+            lineCap: 'butt',
+            lineWidth: 8,
+            onStep: function (from, to, percent) {
+                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+            }
+        });
+
+        $('#demo-pie-3').pieChart({
+            barColor: '#ed6498',
+            trackColor: '#eee',
+            lineCap: 'square',
+            lineWidth: 8,
+            onStep: function (from, to, percent) {
+                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+            }
+        });
+ 
+    });
+
+</script>
+
+<div class="habit-title">
+  <div class="habit-week-pie">
+  <div>
+    <h5>Week 1</h5>
+    <label>Success Rate</label>
+  </div>
+  <div>    
+    <div id="demo-pie-1" class="pie-title-center" data-percent="25"> <span class="pie-value"></span> </div>
+  </div>
+  </div>
+  <div class="habit-week-pie2">
+  <div>
+    <h5>Week 2</h5>
+    <label>Success Rate</label>
+  </div>
+  <div>    
+    <div id="demo-pie-2" class="pie-title-center" data-percent="50"> <span class="pie-value"></span> </div>
+  </div>
+  </div>
+  <div class="habit-week-pie">
+  <div>
+    <h5>Week 3</h5>
+    <label>Success Rate</label>
+  </div>
+  <div>    
+    <div id="demo-pie-3" class="pie-title-center" data-percent="20"> <span class="pie-value"></span> </div>
+  </div>
+  </div>
+</div>
 
 
 <form action="/habits/<%= @habit.id %>" method="POST">
-  <strong><p>Week 1</p></strong>
-  <strong><p>Start</p></strong>
+  <strong><p>WEEK 1</p></strong>
   <input type="submit" value="Save">
   <div>
     <% @week1.each do |day| %>
       <% if day.result == "T" %>
-        <input type="checkbox" name="<%= day.position %>" value="T" checked>Day <%= day.position %>
+        Day <%= day.position %><input type="checkbox" name="<%= day.position %>" value="T" checked>
       <% else %>
-        <input type="checkbox" name="<%= day.position %>" value="T">Day <%= day.position %>
+        Day <%= day.position %><input type="checkbox" name="<%= day.position %>" value="T">
       <% end %>
     <% end %>
     <p>Success Rate: <%= week1_success_rate(@habit.id) %>%<p>
@@ -21,9 +87,9 @@
   <div>
     <% @week2.each do |day| %>
       <% if day.result == "T" %>
-        <input type="checkbox" name="<%= day.position %>" value="T" checked>Day <%= day.position %>
+        Day <%= day.position %><input type="checkbox" name="<%= day.position %>" value="T" checked>
       <% else %>
-        <input type="checkbox" name="<%= day.position %>" value="T">Day <%= day.position %>
+        Day <%= day.position %><input type="checkbox" name="<%= day.position %>" value="T">
       <% end %>
     <% end %>
     <p>Success Rate: <%= week2_success_rate(@habit.id) %>%<p>
@@ -34,13 +100,12 @@
   <div>
     <% @week3.each do |day| %>
       <% if day.result == "T" %>
-        <input type="checkbox" name="<%= day.position %>" value="T" checked>Day <%= day.position %>
+        Day <%= day.position %><input type="checkbox" name="<%= day.position %>" value="T" checked>
       <% else %>
-        <input type="checkbox" name="<%= day.position %>" value="T">Day <%= day.position %>
+        Day <%= day.position %><input type="checkbox" name="<%= day.position %>" value="T">
       <% end %>
     <% end %>
     <p>Success Rate: <%= week3_success_rate(@habit.id) %>%<p> 
-    <strong>End</strong>
   </div>
 </form>
 <br>
