@@ -1,5 +1,6 @@
 <h1>Welcome <%= session[:first_name] %></h1>
 
+<p>Today: <%= Date.today.strftime("%b %-d, %Y") %></p>
 <form method="GET" action="/profile/signout">
   <input type="submit" value="signout">
 </form>
@@ -7,7 +8,13 @@
 <% if @habits %>
   <% @habits.each do |habit| %>
     <div>
-      <p><%= habit.name %></p>
+      <p><a href="<%="/habits/#{habit.id}"%>"><%= habit.name %></a></p>
+      <p>
+        <ul>
+          <li><%= habit.start_date.strftime("%b %-d") + " - " + (habit.start_date + 20).strftime("%b %-d") %></li>
+          <li><%= (Date.today >= habit.start_date) ? ("Day " + (Date.today - habit.start_date).to_i.to_s + " of 21") : "not started" %></li>
+        </ul>
+      </p>
     </div>
   <% end %>
 <% else %>
