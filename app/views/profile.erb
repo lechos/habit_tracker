@@ -6,6 +6,31 @@
   <input type="submit" value="signout">
 </form>
 
+<!-- <table>
+  <th>Past Habits</th>
+  <th>Current Habits</th>
+  <th>Future Habits</th>
+</table> -->
+<!--   <tr><td>a</td><td>a</td><td>a</td></tr>
+  <tr><td>a</td><td>a</td><td>a</td></tr>
+  <tr><td>a</td><td>a</td><td>a</td></tr> -->
+<!--   <%
+    if @habits
+      output =""
+      @habits.each do |habit|
+        date_diff = (Date.today - habit.start_date).to_i
+        if date_diff >= 21
+          output += "asdf"
+        elsif date_diff >= 0
+          output += "jkl"
+        else
+          output += "uiop"
+        end
+      end
+    end
+  %>
+  <%= output %> -->
+
 <% if @habits %>
   <% @habits.each do |habit| %>
     <div>
@@ -27,10 +52,10 @@
           %>
         </ul>
       </p>
-      <form method = "POST" action="/profile/delete">
+<!--       <form method = "POST" action="/profile/delete">
         <input type="hidden" name="habit_id" value="<%= habit.id %>">
         <input type="submit" value="<%= delete_submit_value %>">
-      </form>
+      </form> -->
     </div>
   <% end %>
 <% else %>

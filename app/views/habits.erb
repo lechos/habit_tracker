@@ -45,5 +45,19 @@
 </form>
 <br>
 <br>
+
+<% date_diff = (Date.today - @habit.start_date).to_i
+  if date_diff >= 21
+    delete_submit_value = "Delete from record"
+  elsif date_diff >= 0
+    delete_submit_value = "I give up"
+  else
+    delete_submit_value = "Forget it"
+  end
+%>
+<form method = "POST" action="/profile/delete">
+  <input type="hidden" name="habit_id" value="<%= @habit.id %>">
+  <input type="submit" value="<%= delete_submit_value %>">
+</form>
 <br>
 <a href="/profile">Back to profile page</a>
