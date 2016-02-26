@@ -3,19 +3,34 @@
 <p>Today: <%= Date.today.strftime("%b %-d, %Y") %></p>
 <br>
 <form method="GET" action="/profile/signout">
-  <button><input type="submit" value="signout"></button>
+  <input type="submit" value="signout">
 </form>
 
 <% if @habits %>
   <% @habits.each do |habit| %>
     <div>
-      <p><a href="<%="/habits/#{habit.id}"%>"><%= habit.name %></a></p>
+      <p><a href="<%= "/habits/#{habit.id}" %>"><%= habit.name %></a></p>
       <p>
         <ul>
           <li><%= habit.start_date.strftime("%b %-d") + " - " + (habit.start_date + 20).strftime("%b %-d") %></li>
-          <li><%= (Date.today >= habit.start_date) ? ("Day " + (Date.today - habit.start_date).to_i.to_s + " of 21") : "not started" %></li>
+          <%= date_diff = (Date.today - habit.start_date).to_i
+            if date_diff >= 21
+              delete_submit_value = "Delete from record"
+              "<li style=\"color:black; font-style:italic;\">Finished - (CZ todo 0-100%)</li>"
+            elsif date_diff >= 0
+              delete_submit_value = "I give up"
+              "<li style=\"color:black; font-weight:bold;\">Day " + (date_diff + 1).to_s + " of 21" + "</li>"
+            else
+              delete_submit_value = "Forget it"
+              "<li style=\"color:red;\">Starting in " + (-date_diff).to_s + ((-date_diff == 1)? " day" : " days") + "</li>"
+            end
+          %>
         </ul>
       </p>
+      <form method = "POST" action="/profile/delete">
+        <input type="hidden" name="habit_id" value="<%= habit.id %>">
+        <input type="submit" value="<%= delete_submit_value %>">
+      </form>
     </div>
   <% end %>
 <% else %>
@@ -26,5 +41,5 @@
 <br>
 
 <div class="row center">
-  <a href="/form"><p>Create</p></a>
+  <a href="/form"><p>Create a New Habit</p></a>
 </div>

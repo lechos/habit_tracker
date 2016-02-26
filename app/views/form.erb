@@ -1,22 +1,38 @@
+<!--
 <script>
 function validateForm() {
-  var x = document.forms["update_habit_days"]["start_in_days"].value;
-  if(x < 0) {
-    alert("Days must be greater than 0");
+  var days = document.getElementById("form_form2").value;
+  if(days == null || days == "") {
+    alert("# of days must be filled out.");
     return false;
   }
-  else if(isNaN(x)) {
-    alert("Days must be a number");
+  else if(isNaN(days)) {
+    alert("# of days must be a number.");
     return false;
   }
-  return true;
+  else if(days < 0 || (days % 1 !== 0)) {
+    alert("# of days must be a positive whole number.");
+    return false;
+  }
+  else return true;
 }
 </script>
+-->
 
-<form id="update_habit_days" method="POST", action="/profile/decision", onsubmit="validateForm()">
-  <q>I, <%= session[:first_name] %> <%= session[:last_name] %>, would like to develop the habit of 
-    <input type="text" name="habit_name"> starting 
-    <input type="text" name="start_in_days" list="days">
+<div id="form_bg">
+  <img id="form_image" src= "../images/tumblr_nhggel1Hvs1teue7jo1_1280.jpg">
+</div>
+<div id="form_background">
+</div>
+
+<%= erb :show_flash %>
+
+​
+<form id="add_habit" method="POST", action="/profile/decision">
+
+  <q id="form_font">I, <%= session[:first_name] %> <%= session[:last_name] %>, would like to develop the habit of <br>
+    <input id="form_form1" type="text" name="habit_name" value="<%= if @habit_name; @habit_name; end %>"> starting 
+    <input id="form_form2" type="text" name="start_in_days" list="days" size="3">
     <datalist id="days">
       <option value="0">Today</option>
       <option value="1">1</option>
@@ -25,10 +41,11 @@ function validateForm() {
       <option value="4">4</option>
       <option value="5">5</option>
       <option value="6">A Week</option> 
-    </datalist> day(s) from now</q>
+    </datalist> day(s) from now
+  </q>
   <br>
-    <input type="submit" name="decision" value="I'm Commited">
-    <input type="submit" name="decision" value="I Changed My Mind">
+    <input id="form_form3" type="submit" name="committed" value="I'm Commited!">
+    <input id="form_form4" type="submit" name="changed_mind" value="Never mind..">
 </form>
 
 
@@ -37,4 +54,4 @@ function validateForm() {
 
 
 <!-- <input type="radio" name="type_of_habit" value="create">(create)/
-<input type="radio" name="type_of_habit" value="break">(break)   -->
+<input type="radio" name="type_of_habit" value="break">(break)   

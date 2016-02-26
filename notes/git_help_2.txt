@@ -1,0 +1,20 @@
+Monica's git guide
+
+(did some work)
+git add .
+git status
+git commit -m "profile"
+git checkout "backup_name" - optionally, back up your stuff to a new branch.
+git pull origin master - pull from remote, mix with local master. files will be mixed and HEADs will be added where conflicts exist
+git status - check again
+
+
+after fixing conflicts
+
+git add .
+git status (2x check)
+git commit -m "resolving merge"
+git push origin master
+
+add
+.DS_Store to .gitignore
