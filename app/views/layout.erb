@@ -3,7 +3,6 @@
 <head>  
 <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 
@@ -12,13 +11,8 @@
   <title></title>
 </head>
 <body>
-  <div id="bg">
-    <img src= "/images/trees-766232.jpg">
+  <div>
+    <%= yield %>
   </div>
-  <div class="section no-pad-bot" id="index-banner">
-  <div class="container">
-   <%= yield %>
-   </div>
-   </div>
 </body>
 </html>
