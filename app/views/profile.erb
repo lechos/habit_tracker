@@ -1,4 +1,5 @@
-<div class="row center"><h3>Welcome <%= session[:first_name] %></h3></div>
+<style> body {background-color: #ddff99;} </style>
+<div id="welcome" class="titlehide"><h3>Welcome <%= session[:first_name] %></h3></div>
 <p>Today: <%= Date.today.strftime("%b %-d, %Y") %></p>
 <br>
 <form method="GET" action="/profile/signout">
