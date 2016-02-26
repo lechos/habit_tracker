@@ -1,15 +1,25 @@
 <form method="POST", action="/profile/decision">
-  <q>I, <%= session[:first_name] %> <%= session[:last_name] %>, would like to 
-    <input type="radio" name="type_of_habit" value="create">(create)/
-    <input type="radio" name="type_of_habit" value="break">(break) the habit of 
+  <q>I, <%= session[:first_name] %> <%= session[:last_name] %>, would like to develop the habit of 
     <input type="text" name="habit_name"> starting 
     <input type="text" name="start_in_days" list="days">
     <datalist id="days">
       <option value="0">Today</option>
-      <option value="1">Tomorrow</option>
-      <option value="7">A Week</option> 
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">A Week</option> 
     </datalist> day(s) from now</q>
   <br>
     <input type="submit" name="decision" value="I'm Commited">
     <input type="submit" name="decision" value="I Changed My Mind">
 </form>
+
+
+
+
+
+
+<!-- <input type="radio" name="type_of_habit" value="create">(create)/
+<input type="radio" name="type_of_habit" value="break">(break)   -->

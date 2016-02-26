@@ -9,6 +9,7 @@
   <br>
   <a href="/profile">Get Started</a>
 <% else %>
+  <%= erb :show_flash %>
   <form action="/profile/signin" method="post">
     <label for="email">Email: </label> 
     <input type="text" name="email" id="email" value="testuser@gmail.com"><br>

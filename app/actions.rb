@@ -3,8 +3,8 @@ helpers do
     @user_id = session[:user_id] if session[:user_id]
   end
 
-  def flash
-    session[:flash] = "Invalid information" if session[:flash]
+  def check_flash
+    @flash = session[:flash] if session[:flash]
     session[:flash] = nil
   end
 
@@ -59,7 +59,7 @@ end
 
 before do
   current_user
-  flash
+  check_flash
 end
 
 get '/' do
@@ -75,14 +75,20 @@ post '/profile/signin' do
     email: params[:email],
     password: params[:password]
     )
+  @user_email = User.find_by(
+    email: params[:email]
+    )
   if @user    # user not falsey
     session[:user_id] = @user.id    # setting session hash values 
     session[:email] = @user.email
     session[:first_name] = @user.first_name
     session[:last_name] = @user.last_name
     redirect '/'
+  elsif @user_email
+    session[:flash] = "Password doesn't match our records. Please try again."
+    redirect '/'
   else
-    session[:flash] = "Invalid information"
+    session[:flash] = "Email doesn't match our records. Please try again."
     redirect '/'
   end
 end
