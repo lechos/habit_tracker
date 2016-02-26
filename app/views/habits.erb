@@ -1,0 +1,49 @@
+<h1><%= @habit.name %></h1>
+
+
+<form action="/habits" method="POST">
+  <strong><p>Week 1</p></strong>
+  <strong><p>Start</p></strong>
+  <input type="submit" value="Save">
+  <div>
+    <% @week1.each do |day| %>
+      <% if day.result == "T" %>
+        <input type="checkbox" name="<%= day.position %>" value="T" checked>Day <%= day.position %>
+      <% else %>
+        <input type="checkbox" name="<%= day.position %>" value="T">Day <%= day.position %>
+      <% end %>
+    <% end %>
+    <p>Success Rate: <%= week1_success_rate(@habit.id) %>%<p>
+  </div>
+  <br>
+  <br>
+  <strong><p>Week 2</p></strong>
+  <div>
+    <% @week2.each do |day| %>
+      <% if day.result == "T" %>
+        <input type="checkbox" name="<%= day.position %>" value="T" checked>Day <%= day.position %>
+      <% else %>
+        <input type="checkbox" name="<%= day.position %>" value="T">Day <%= day.position %>
+      <% end %>
+    <% end %>
+    <p>Success Rate: <%= week2_success_rate(@habit.id) %>%<p>
+  </div>
+  <br>
+  <br>
+  <strong><p>Week 3</p></strong>
+  <div>
+    <% @week3.each do |day| %>
+      <% if day.result == "T" %>
+        <input type="checkbox" name="<%= day.position %>" value="T" checked>Day <%= day.position %>
+      <% else %>
+        <input type="checkbox" name="<%= day.position %>" value="T">Day <%= day.position %>
+      <% end %>
+    <% end %>
+    <p>Success Rate: <%= week3_success_rate(@habit.id) %>%<p> 
+    <strong>End</strong>
+  </div>
+</form>
+<br>
+<br>
+<br>
+<a href="/profile">Back to profile page</a>
