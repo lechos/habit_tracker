@@ -109,15 +109,6 @@
   position: fixed;
 }
 
-<<<<<<< HEAD
-/*@font-face {
-  font-family: 'Sunday';
-  src: url('/fonts/Sunday-Regular.otf');
-}
-*/
-
-=======
->>>>>>> login_form
 #form_font {
   font-family: 'Copperplate';
   font-size: 30px;
@@ -212,15 +203,15 @@
 #get_started {
   font-size: 30px;
   color: green;
+}
 
-.login{
+.login {
   margin-right: auto;
   margin-left: auto;
   height: 150px;
   width: 350px;
   padding: 10px;
   z-index: 2;
->>>>>>> login_form
 }
 
 .login input[type=text]{
