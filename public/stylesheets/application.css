@@ -3,8 +3,8 @@
   position: fixed; 
   top: -50%; 
   left: -50%; 
-  width: 200%; 
-  height: 200%;
+  width: 25%; 
+  height: 25%;
 }
 #bg img {
   position: absolute; 
@@ -205,22 +205,6 @@
 
 .habit-title {
   display: -webkit-box;
-}
-
-/*q {
-  font-size: 20px;
-  font-family: Helvetica;
-  }*/
-#title {
-  font-family: Verdana;
-  font-size: 75px;
-}
-#index {
-  font-family: Verdana;
-}
-#get_started {
-  font-size: 30px;
-  color: green;
 }
 
 .login {
