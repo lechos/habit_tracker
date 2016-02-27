@@ -381,7 +381,7 @@
   font-size:22px;
   color:#ffffff;
   font-family: 'copperplate';
-  font-weight: 300;
+  font-weight: 500;
   text-align:left;
 }
 
@@ -435,4 +435,9 @@
   font-size: 40px;
   margin-top: -25px;
 
+}
+
+.form_ul {
+  -webkit-padding-start: 20px;
+  -webkit-margin-before: 0em;
 }
