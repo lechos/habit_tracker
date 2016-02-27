@@ -3,8 +3,8 @@
   position: fixed; 
   top: -50%; 
   left: -50%; 
-  width: 200%; 
-  height: 200%;
+  width: 25%; 
+  height: 25%;
 }
 #bg img {
   position: absolute; 
@@ -25,7 +25,6 @@
 .titlehide {
   display: none;
 }
-
 .container {
   width: 100%;
   margin-top: 100px;
@@ -150,18 +149,22 @@
 /*html {
     font-family: "Lucida Sans Unicode", Verdana, Trebuchet, sans-serif;
 }*/
-q {
+/*q {
   font-size: 20px;
   font-family: Helvetica;
-  }
+  }*/
 #title {
   font-family: Verdana;
   font-size: 75px;
 }
 #index {
-  font-family: Verdana;
+  font-family: Helvetica;
+  font-weight: normal;
 }
 #get_started {
   font-size: 30px;
   color: green;
+}
+#growth {
+  z-index: -1;
 }
