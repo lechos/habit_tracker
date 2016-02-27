@@ -1,5 +1,38 @@
-<h1 class="habit-title"><%= @habit.name %></h1>
 
+<style>
+  .week span {
+    display: inline-block;
+    width: 70px;
+
+    /* NoSelect */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
+    user-select: none;           /* non-prefixed version, currently
+                                    not supported by any browser */
+  }
+  .clickable-day {
+    /*background-color:yellow;*/
+  }
+  .clickable-day.red {
+    background-color:red;
+  }
+  .clickable-day.green {
+    background-color:green;
+  }
+
+  .clickable-today {
+    background-color:yellow;
+  }
+  .clickable-today.red {
+    background-color:red;
+  }
+  .clickable-today.green {
+    background-color:green;
+  }
+</style>
 <script src="/js/pie-chart.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -35,8 +68,40 @@
  
     });
 
+    $(document).ready(function(){
+      $(".clickable-day").on('click', function() {
+        if ($(this).hasClass('red')) {
+            $(this).removeClass('red').addClass('green');
+        }
+        else {
+            $(this).removeClass('green').addClass('red');
+        }
+      });
+    });
+    $(document).ready(function(){
+      $(".clickable-today").on('click', function() {
+        if ($(this).hasClass('red')) {
+            $(this).removeClass('red').addClass('green');
+        }
+        else {
+            $(this).removeClass('green').addClass('red');
+        }
+      });
+    });
+
+
+    // inside clickable-day \ if \ ..
+    //        $.ajax({
+    //          url: 'user/23/update-day',
+    //          method: 'post',
+    //          data: {variable: "string value", integer_var: 6, clicked_day: 23}
+    //          success: function () {
+                // do stuff once request is answered.
+    //          }
+    //        });
 </script>
 
+<h1 class="habit-title"><%= @habit.name %></h1>
 <div class="habit-title">
   <div class="habit-week-pie">
   <div>
@@ -69,15 +134,18 @@
 
 
 <form action="/habits/<%= @habit.id %>" method="POST">
-  <strong><p>WEEK 1</p></strong>
+  <strong><p>Week 1</p></strong>
   <input type="submit" value="Save">
-  <div>
-    <% @week1.each do |day| %>
-      <% if day.result == "T" %>
-        Day <%= day.position %><input type="checkbox" name="<%= day.position %>" value="T" checked>
-      <% else %>
-        Day <%= day.position %><input type="checkbox" name="<%= day.position %>" value="T">
-      <% end %>
+  <div class="week">
+
+      <% calendar_today = (Date.today - @habit.start_date).to_i %>
+      <% @week1.each do |day| %>
+        <% if day.result == "T" %>
+          <span name="<%= day.position %>" id="<%= day.position %>" value="T" class="<%= day.position == calendar_today ? "clickable-today" : "clickable-day" %>">
+        <% else %>
+          <span name="<%= day.position %>" id="<%= day.position %>" value="F" class="<%= day.position == calendar_today ? "clickable-today" : "clickable-day" %>">
+        <% end %>
+      Day <%= day.position %></span>
     <% end %>
     <p>Success Rate: <%= week1_success_rate(@habit.id) %>%<p>
   </div>
