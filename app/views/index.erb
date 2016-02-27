@@ -1,26 +1,23 @@
 <div id="bg">
   <img src= "/images/trees-766232.jpg">
 </div>
-<div class="section no-pad-bot" id="index-banner">
-</div>
+<!-- <div class="section no-pad-bot" id="index-banner">
+</div> -->
 
-<br><br><br>
-<h1 class="center-align">Habit Tracker</h1>
+<h1 id="title">Habit Tracker</h1>
 
-<div class="row center">
-  <h5>Develop a habit in three weeks.</h5>
+<div>
+  <h3 id="index">.</h3>
 </div>
 <br><br>
 
-<div class="row center">
+<div>
   <q>We become what we repeatedly do.</q>
 </div>
 
 <% if current_user %>
   <br><br>
-  <div class="row center">
-    <a href="/profile">Get Started</a>
-  </div>
+  <div id="get_started"><a href="/profile">Get Started</a></div>
 <% else %>
   <%= erb :show_flash %>
   <form action="/profile/signin" method="post">
