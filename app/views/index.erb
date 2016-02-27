@@ -1,32 +1,22 @@
-<div id="bg">
-  <img src= "/images/trees-766232.jpg">
+<div class="main_page">
+  <img id="main_image" src= "/images/picjumbo.com_HNCK3988.jpg">
+  <br><br><br><br>
+  <div class="div_inline">
+    <h1 id="main_title">Habit<br>Tracker</h1>
+    <h3 id="quote">Develop a habit in three weeks.<br><q>We become what we repeatedly do.</q></h3>
+  </div>
+  <div class="div_inline">
+    <form action="/profile/signin" method="post">
+      <%= erb :show_flash %>
+      <div class="login">
+        <label for="email"></label>
+        <input type="text" placeholder="email" name="email" value="testuser@gmail.com"><br>
+        <label for="password"></label>
+        <input type="password" placeholder="password" name="password" value="password"><br>
+        <input type="submit" value="Login">
+        <br>
+        <div class="copperplate">Don't have an account? <a class="main_signup" href="/new_account">Sign up</a></div>
+      </div>
+    </form>
+  </div>
 </div>
-<!-- <div class="section no-pad-bot" id="index-banner">
-</div> -->
-
-<h1 id="title">Habit Tracker</h1>
-
-<div>
-  <h3 id="index">.</h3>
-</div>
-<br><br>
-
-<div>
-  <q>We become what we repeatedly do.</q>
-</div>
-
-<% if current_user %>
-  <br><br>
-  <div id="get_started"><a href="/profile">Get Started</a></div>
-<% else %>
-  <%= erb :show_flash %>
-  <form action="/profile/signin" method="post">
-    <label for="email">Email: </label> 
-    <input type="text" name="email" id="email" value="testuser@gmail.com"><br>
-    <label for="password">Password: </lable>
-    <input type="password" name="password" value="password"><br>
-    <input type="submit" value="Sign In">
-  </form>
-  <p><a href="/new_account">Create New Account</a></p>
-<% end %>
-
