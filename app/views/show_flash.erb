@@ -1,3 +1,23 @@
-<% if @flash %>
-    <p style="border: 1px solid red; padding: 10px; color: red;"><%= @flash %></p>
+<% if @flash == ("Habit name cannot be less than 3 characters." || "Password doesn't match our records. Please try again.") %>
+  <div data-alert class="alert-box alert">
+    <%= @flash %>
+  </div>
+<% elsif @flash == ("Start in days can not be empty." || "Email doesn't match our records. Please try again.") %>
+  <div data-alert class="alert-box warning">
+    <%= @flash %>
+  </div>
+<% elsif @flash == "Start in days must be a positive whole number." %>
+  <div data-alert class="alert-box success">
+    <%= @flash %> 
+  </div>
+<% elsif @flash == "Other error messages here" %>
+  <div data-alert class="alert-box info">
+    <%= @flash %>
+  </div>
+<% else %>
+  <% nil %>
 <% end %>
+
+
+
+

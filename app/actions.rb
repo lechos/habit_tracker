@@ -94,7 +94,7 @@ post '/profile/signin' do
     session[:email] = @user.email
     session[:first_name] = @user.first_name
     session[:last_name] = @user.last_name
-    redirect '/'
+    redirect '/profile'
   elsif @user_email
     session[:flash] = "Password doesn't match our records. Please try again."
     redirect '/'
