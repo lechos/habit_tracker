@@ -1,70 +1,109 @@
-<style> body {background-color: #ddff99;} </style>
-<div id="welcome" class="titlehide"><h3>Welcome <%= session[:first_name] %></h3></div>
-<p>Today: <%= Date.today.strftime("%b %-d, %Y") %></p>
-<br>
-<form method="GET" action="/profile/signout">
-  <input type="submit" value="signout">
-</form>
-
-<!-- <table>
-  <th>Past Habits</th>
-  <th>Current Habits</th>
-  <th>Future Habits</th>
-</table> -->
-<!--   <tr><td>a</td><td>a</td><td>a</td></tr>
-  <tr><td>a</td><td>a</td><td>a</td></tr>
-  <tr><td>a</td><td>a</td><td>a</td></tr> -->
-<!--   <%
-    if @habits
-      output =""
-      @habits.each do |habit|
-        date_diff = (Date.today - habit.start_date).to_i
-        if date_diff >= 21
-          output += "asdf"
-        elsif date_diff >= 0
-          output += "jkl"
-        else
-          output += "uiop"
-        end
-      end
-    end
-  %>
-  <%= output %> -->
-
-<% if @habits %>
-  <% @habits.each do |habit| %>
-    <div>
-      <p><a href="<%= "/habits/#{habit.id}" %>"><%= habit.name %></a></p>
-      <p>
-        <ul>
-          <li><%= habit.start_date.strftime("%b %-d") + " - " + (habit.start_date + 20).strftime("%b %-d") %></li>
-          <%= date_diff = (Date.today - habit.start_date).to_i
-            if date_diff >= 21
-              delete_submit_value = "Delete from record"
-              "<li style=\"color:black; font-style:italic;\">Finished - (CZ todo 0-100%)</li>"
-            elsif date_diff >= 0
-              delete_submit_value = "I give up"
-              "<li style=\"color:black; font-weight:bold;\">Day " + (date_diff + 1).to_s + " of 21" + "</li>"
-            else
-              delete_submit_value = "Forget it"
-              "<li style=\"color:red;\">Starting in " + (-date_diff).to_s + ((-date_diff == 1)? " day" : " days") + "</li>"
-            end
-          %>
-        </ul>
-      </p>
-<!--       <form method = "POST" action="/profile/delete">
-        <input type="hidden" name="habit_id" value="<%= habit.id %>">
-        <input type="submit" value="<%= delete_submit_value %>">
-      </form> -->
-    </div>
-  <% end %>
-<% else %>
-<br>
-<br>
-  <p>You are not tracking any habits</p>
-<% end %>
-<br>
-
-<div class="row center">
+<div class="profile_div">
+  <img id="profile_image"src="/images/tumblr_ngfwlvHb1i1qfirfao1_1280.jpg">
+  <h1 class="profile_title">Welcome <%= session[:first_name] %></h1>
+  <p>Today: <%= Date.today.strftime("%b %-d, %Y") %></p>
   <a href="/form"><p>Create a New Habit</p></a>
+  <form method="GET" action="/profile/signout">
+    <input type="submit" value="signout">
+  </form>
+
+<br>
+
+
+<div class="ongoing_div">
+  <h2>Ongoing Habits</h2>
+    <% if @habits %>
+      <% @habits.each do |habit| %>
+        <div>
+            <ul>
+              <% date_diff = (Date.today - habit.start_date).to_i %>
+                <% if date_diff >= 0 && date_diff < 21 %>
+                  <% delete_submit_value = "I give up" %>
+                  <div class="card">
+                    <div class="pics_card" style="background-image: url(images/pic1.png);">
+                      <div class="txt_title_card">
+                        <%= habit.name %>
+                      </div>
+                    </div>
+                    <div class="txt_desciption_card"><li>- <%= habit.start_date.strftime("%b %-d") + " - " + (habit.start_date + 20).strftime("%b %-d") %></li>
+                                  <li>- <%= "Day " + (date_diff + 1).to_s + " of 21" %></li></div>
+                      <div class="tool_link_back">
+                        <a href="/habits/<%= habit.id %>"><div class="tool_link" style="color:#ff8f00">Detail</div></a>
+                        <div class="tool_link" style="color:red;">Delete</div>
+                      </div>
+                    </div>
+                <% end %>
+            </ul>
+        </div>
+      <% end %>
+    <% end %>
+</div>
+
+
+<div class="future_div">
+  <h2>Future Habits</h2>
+    <% if @habits %>
+      <% @habits.each do |habit| %>
+        <div>
+          <ul>
+            <% date_diff = (Date.today - habit.start_date).to_i %>
+            <% if date_diff < 0 %>
+              <% delete_submit_value = "Forget it" %>
+              <div class="card">
+                <div class="pics_card" style="background-image: url(images/pic2.png);">
+                  <div class="txt_title_card">
+                    <%= habit.name %>
+                  </div>
+                </div>
+                <div class="txt_desciption_card">
+                  <li>- <%= habit.start_date.strftime("%b %-d") + " - " + (habit.start_date + 20).strftime("%b %-d") %></li>
+                  <li>- <%= "Starting in " + (-date_diff).to_s + ((-date_diff == 1)? " day" : " days") %></li>
+                </div>
+                <div class="tool_link_back">
+                  <a href="/habits/<%= habit.id %>"><div class="tool_link" style="color:#ff8f00">Detail</div></a>
+                  <div class="tool_link" style="color:red;">Delete</div>
+                </div>
+              </div>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+</div>
+
+<div class="past_div">
+  <h2>Past Habits</h2>
+    <% if @habits %>
+      <% @habits.each do |habit| %>
+        <div>
+          <ul>
+            <% date_diff = (Date.today - habit.start_date).to_i %>
+            <% if date_diff >= 21 %>
+              <% delete_submit_value = "Delete from record" %>
+              <div class="card">
+                <div class="pics_card" style="background-image: url(images/pic3.png);">
+                  <div class="txt_title_card">
+                    <%= habit.name %>
+                  </div>
+                </div>
+                <div class="txt_desciption_card">
+                  <li>- Finished (CZ todo 0-100%)</li>
+                </div>
+                <div class="tool_link_back">
+                  <a href="/habits/<%= habit.id %>"><div class="tool_link" style="color:#ff8f00">Detail</div></a>
+                  <div class="tool_link" style="color:red;">Delete</div>
+                </div>
+              </div>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+</div>
+
+  <% else %>
+    <br>
+    <br>
+    <p>You are not tracking any habits</p>
+  <% end %>
+  <br>
 </div>
