@@ -172,3 +172,26 @@ post '/habits/:id' do
   update_day_result
   redirect "/habits/#{params[:id]}"
 end
+
+get '/calendar' do
+  erb :'calendar'
+end
+
+get '/signup' do
+  erb :'signup'
+end
+
+post '/profile/signup' do
+  @user = User.new(
+    first_name: params[:first_name].capitalize,
+    last_name: params[:last_name].capitalize,
+    email: params[:email],
+    password: params[:password]
+    )
+  if @user    # user not falsey
+    @user.save
+    redirect '/'
+  else
+    redirect '/signup'
+  end
+end

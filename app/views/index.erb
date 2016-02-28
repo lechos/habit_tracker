@@ -1,13 +1,13 @@
 <div class="main_page">
+<%= erb :show_flash %>
   <img id="main_image" src= "/images/picjumbo.com_HNCK3988.jpg">
   <br><br><br><br>
   <div class="div_inline">
     <h1 id="main_title">Habit<br>Tracker</h1>
-    <h3 id="quote">Develop a habit in three weeks.<br><q>We become what we repeatedly do.</q></h3>
+    <h3 id="quote">A tool to facilitate good habits<br><q>We become what we repeatedly do</q></h3>
   </div>
   <div class="div_inline">
     <form action="/profile/signin" method="post">
-      <%= erb :show_flash %>
       <div class="login">
         <label for="email"></label>
         <input type="text" placeholder="email" name="email" value="testuser@gmail.com"><br>
@@ -15,7 +15,7 @@
         <input type="password" placeholder="password" name="password" value="password"><br>
         <input type="submit" value="Login">
         <br>
-        <div class="copperplate">Don't have an account? <a class="main_signup" href="/new_account">Sign up</a></div>
+        <div class="copperplate">Don't have an account? <a class="main_signup" href="/signup">Sign up</a></div>
       </div>
     </form>
   </div>
