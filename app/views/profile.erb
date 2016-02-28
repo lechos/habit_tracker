@@ -8,11 +8,11 @@
 
 <div class="profile_div">
   <img id="profile_image"src="/images/tumblr_ngfwlvHb1i1qfirfao1_1280.jpg">
-<br>
+</div>
 
 
 <div class="ongoing_div">
-  <h2>Ongoing Habits</h2>
+  <h2 class="habit_title">Ongoing Habits</h2>
     <% if @habits %>
       <% @habits.each do |habit| %>
         <div>
@@ -45,7 +45,7 @@
 
 
 <div class="future_div">
-  <h2>Future Habits</h2>
+  <h2 class="habit_title">Future Habits</h2>
     <% if @habits %>
       <% @habits.each do |habit| %>
         <div>
@@ -77,7 +77,7 @@
 </div>
 
 <div class="past_div">
-  <h2>Past Habits</h2>
+  <h2 class="habit_title">Past Habits</h2>
     <% if @habits %>
       <% @habits.each do |habit| %>
         <div>
