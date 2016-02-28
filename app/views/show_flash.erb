@@ -1,8 +1,8 @@
-<% if @flash == ("Habit name cannot be less than 3 characters." || "Password doesn't match our records. Please try again.") %>
+<% if (@flash == "Habit name cannot be less than 3 characters.") || (@flash == "Password doesn't match our records. Please try again.") %>
   <div data-alert class="alert-box alert">
     <%= @flash %>
   </div>
-<% elsif @flash == ("Start in days can not be empty." || "Email doesn't match our records. Please try again.") %>
+<% elsif (@flash == "Start in days can not be empty.") || (@flash == "Email doesn't match our records. Please try again.") %>
   <div data-alert class="alert-box warning">
     <%= @flash %>
   </div>

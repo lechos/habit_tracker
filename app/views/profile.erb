@@ -1,12 +1,13 @@
+<div class="profile_nav">
+  <h1 class="profile_title"><strong>HABIT</strong></h1> <h1 class="profile_title_light">TRACKER
+  </h1>
+  <p class="profile_welcome">Welcome</p> 
+  <p class="profile_name"><%= session[:first_name] %> <%= session[:last_name] %></p>
+  <%= erb :calendar %>
+</div>
+
 <div class="profile_div">
   <img id="profile_image"src="/images/tumblr_ngfwlvHb1i1qfirfao1_1280.jpg">
-  <h1 class="profile_title">Welcome <%= session[:first_name] %></h1>
-  <p>Today: <%= Date.today.strftime("%b %-d, %Y") %></p>
-  <a href="/form"><p>Create a New Habit</p></a>
-  <form method="GET" action="/profile/signout">
-    <input type="submit" value="signout">
-  </form>
-
 <br>
 
 
