@@ -204,6 +204,7 @@
   border: none;
   border-bottom: 1px solid #C7C7C7;
   color: white;
+  font-family: copperplate;
 }
 
 #form_form2 {
@@ -214,6 +215,7 @@
   border: none;
   border-bottom: 1px solid #C7C7C7;
   color: white;
+  font-family: copperplate;
 }
 
 #form_form3{
@@ -419,6 +421,7 @@
 }
 
 .card {
+  border-radius: 15px;
   background-color:#ffffff;
   margin:5px; 
   width: 235px;
@@ -460,11 +463,12 @@
   padding: 5px;
   font-size: 17px;
   color:#999999;
-  font-family: 'Roboto';
   font-weight: 400;
   text-align: left;
   padding-left: 12px;
   padding-top: 10px;
+  font-family: diavlo_light;
+
 }
 
 .tool_link {
@@ -472,7 +476,8 @@
   padding:0px 10px 0px 10px;
   text-align: center;
   font-size:17px;
-  font-family: 'Roboto';
+  font-family: diavlo_light;
+;
   font-weight: 500;
   cursor: pointer;
 }

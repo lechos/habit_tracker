@@ -19,7 +19,8 @@
             <% date_diff = (Date.today - habit.start_date).to_i %>
             <% if date_diff >= 0 && date_diff < 21 %>
               <% delete_submit_value = "I give up" %>
-              <div class="card">
+              <div class="card" style="
+    border-radius: 15px;">
                 <div class="pics_card" style="background-image: url(images/pic1.png);">
                   <div class="txt_title_card">
                     <%= habit.name %>
@@ -51,7 +52,8 @@
           <% date_diff = (Date.today - habit.start_date).to_i %>
           <% if date_diff < 0 %>
             <% delete_submit_value = "Forget it" %>
-            <div class="card">
+            <div class="card" style="
+    border-radius: 15px;">
               <div class="pics_card" style="background-image: url(images/pic2.png);">
                 <div class="txt_title_card">
                   <%= habit.name %>
@@ -82,7 +84,8 @@
           <% date_diff = (Date.today - habit.start_date).to_i %>
           <% if date_diff >= 21 %>
             <% delete_submit_value = "Delete from record" %>
-            <div class="card">
+            <div class="card" style="
+    border-radius: 15px;">
               <div class="pics_card" style="background-image: url(images/pic3.png);">
                 <div class="txt_title_card">
                   <%= habit.name %>
