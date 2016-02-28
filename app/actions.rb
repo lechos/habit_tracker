@@ -49,21 +49,21 @@ helpers do
     week1 = Day.where(habit_id: habit_id, position:(1..7), result:"T")
     number_success = week1.count
     rate = number_success/7.0*100
-    rate.round(2)
+    rate.round(1)
   end
 
   def week2_success_rate(habit_id)
     week1 = Day.where(habit_id: habit_id, position:(8..14), result:"T")
     number_success = week1.count
     rate = number_success/7.0*100
-    rate.round(2)
+    rate.round(1)
   end
 
   def week3_success_rate(habit_id)
     week1 = Day.where(habit_id: habit_id, position:(15..21), result:"T")
     number_success = week1.count
     rate = number_success/7.0*100
-    rate.round(2)
+    rate.round(1)
   end
 end
 
@@ -79,6 +79,13 @@ end
 get '/form' do
   repopulate_habit_name
   erb :form
+end
+
+# CZ: called from habits.erb \ calendar \ updateDay ajax function
+get '/update_day' do
+  day_to_update = Day.find_by(habit_id: params[:habit].to_i, position: params[:day].to_i)
+  day_to_update.result = params[:result]
+  day_to_update.save
 end
 
 post '/profile/signin' do
