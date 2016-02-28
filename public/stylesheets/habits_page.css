@@ -1,0 +1,82 @@
+.week span {
+  display: inline-block;
+  width: 70px;
+
+  /* NoSelect */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+.week span {
+  cursor: pointer;
+}
+
+.toggle-today {
+  color:yellow;
+  font-weight: bold;
+}
+
+.toggle-day-red {
+  background-color:red;
+}
+.toggle-day-red.red {
+  background-color:red;
+}
+.toggle-day-red.green {
+  background-color:green;
+}
+
+.toggle-day-green {
+  background-color:green;
+}
+.toggle-day-green.red {
+  background-color:red;
+}
+.toggle-day-green.green {
+  background-color:green;
+}
+
+.toggle-day-gray {
+  background-color:gray;
+}
+
+.side_pic {
+  background-color: #333333;
+  width: 391px;
+  height: 100%;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -15;
+}
+
+.habit_title {
+  font-size: 2.6em;
+  color: white;
+  font-family: diavlo;
+}
+
+#habit_image {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 20.31%;
+  margin: auto;
+  width: 80%;
+  height: 120%;
+  -webkit-filter: blur(1px) opacity(80%) brightness(40%);;
+}
+
+.main_div_habit {
+  width: 70%;
+  left: 24%;
+  position: absolute;
+  color: white;
+  text-align: left;
+}
