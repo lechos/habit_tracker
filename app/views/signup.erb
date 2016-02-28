@@ -1,0 +1,25 @@
+<div class="main_page">
+  <img id="main_image" src= "/images/picjumbo.com_HNCK3988.jpg">
+  <br><br><br><br>
+  <div class="div_inline">
+    <h1 id="main_title">Habit<br>Tracker</h1>
+    <h3 id="quote">Develop a habit in three weeks.<br><q>We become what we repeatedly do.</q></h3>
+  </div>
+  <div class="div_inline">
+    <form action="/profile/signup" method="post">
+      <%= erb :show_flash %>
+      <div class="login">
+        <label for="first_name"></label>
+        <input type="text" placeholder="first name" name="first_name"><br>
+        <label for="last_name"></label>
+        <input type="text" placeholder="last name" name="last_name"><br>
+        <label for="email"></label>
+        <input type="text" placeholder="email" name="email"><br>
+        <label for="password"></label>
+        <input id="password_margin" type="password" placeholder="password" name="password"><br>
+        <input type="submit" value="Signup">
+        <br>
+      </div>
+    </form>
+  </div>
+</div>
