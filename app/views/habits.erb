@@ -1,52 +1,20 @@
-<style>
-  .week span {
-    display: inline-block;
-    width: 70px;
+<link rel="stylesheet" href="/stylesheets/habits_page.css">
 
-    /* NoSelect */
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none;   /* Chrome/Safari/Opera */
-    -khtml-user-select: none;    /* Konqueror */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* IE/Edge */
-    user-select: none;           /* non-prefixed version, currently
-                                    not supported by any browser */
-  }
+<div class="profile_nav">
+  <h1 class="profile_title"><strong>HABIT</strong></h1> <h1 class="profile_title_light">TRACKER
+  </h1>
+  <p class="profile_welcome">Welcome</p> 
+  <p class="profile_name"><%= session[:first_name] %> <%= session[:last_name] %></p>
+  <%= erb :nav_habits %>
+</div>
 
-  .toggle-today {
-    color:yellow;
-    cursor: pointer;
-    font-weight: bold;
-  }
+<div class="side_pic">
+</div>
 
-  .toggle-day-red {
-    background-color:red;
-    cursor: pointer;
-  }
-  .toggle-day-red.red {
-    background-color:red;
-  }
-  .toggle-day-red.green {
-    background-color:green;
-  }
+<div class="profile_div">
+  <img id="habit_image"src="/images/53H.jpg">
+</div>
 
-  .toggle-day-green {
-    background-color:green;
-    cursor: pointer;
-  }
-  .toggle-day-green.red {
-    background-color:red;
-  }
-  .toggle-day-green.green {
-    background-color:green;
-  }
-
-  .toggle-day-gray {
-    background-color:gray;
-    cursor: default;
-  }
-
-</style>
 <script src="/javascript/pie-chart.js" type="text/javascript"></script>
 <script type="text/javascript">
 
@@ -78,7 +46,7 @@
       //draw updated piechart
         $pie.attr("data-percent", success_rate);
         $pie.pieChart({ //draws circle even with empty function
-          barColor: '#fbb03b',  //3bb2d0
+          barColor: '#3bb2d0',  //3bb2d0
           trackColor: '#eee',
           lineCap: 'round',
           lineWidth: 8,
@@ -115,7 +83,7 @@
         $pie3.remove();
         $pie.attr("data-percent", success_rate);
         $pie3.pieChart({
-            barColor: '#fbb03b',    //ed6498
+            barColor: '#ed6498',    //ed6498
             trackColor: '#eee',
             lineCap: 'round',
             lineWidth: 8,
@@ -153,7 +121,7 @@
   //Draws circle and %
     $pie1 = $('#demo-pie-1');
     $pie1.pieChart({ //draws circle even with empty function
-        barColor: '#fbb03b',   //#3bb2d0
+        barColor: '#3bb2d0',   //#3bb2d0
         trackColor: '#eee',
         lineCap: 'round',
         lineWidth: 8,
@@ -175,7 +143,7 @@
 
     $pie3 = $('#demo-pie-3')
     $pie3.pieChart({
-        barColor: '#fbb03b',    //#ed6498
+        barColor: '#ed6498',    //#ed6498
         trackColor: '#eee',
         lineCap: 'round',
         lineWidth: 8,
@@ -214,62 +182,11 @@
 
 </script>
 
-
-<!-- testing: -->
-<!-- <div id="output1">waiting for action</div>
-<div id="output2">waiting for action</div>
-<div id="output3">waiting for action</div>
-<div id="output4">waiting for action</div>
-<div id="output5">waiting for action</div>
-<div id="output6">waiting for action</div>
-<div id="output7">waiting for action</div> -->
-<!-- /testing -->
-
-
-<h1 class="habit-title"><%= @habit.name %></h1>
-
-<div class="habit-title">
-
-  <div class="habit-week-pie">
-    <div>
-      <h5>Week 1</h5>
-      <label>Success Rate</label>
-    </div>
-    <div id="week1-pie">
-      <div id="demo-pie-1" class="pie-title-center" data-percent="<%= week1_success_rate(@habit.id)%>">
-        <span class="pie-value"></span>
-      </div>
-    </div>
-  </div>
-
-  <div class="habit-week-pie2">
-    <div>
-      <h5>Week 2</h5>
-      <label>Success Rate</label>
-    </div>
-    <div id="week2-pie">
-      <div id="demo-pie-2" class="pie-title-center" data-percent="<%= week2_success_rate(@habit.id)%>">
-        <span class="pie-value"></span>
-      </div>
-    </div>
-  </div>
-
-  <div class="habit-week-pie">
-    <div>
-      <h5>Week 3</h5>
-      <label>Success Rate</label>
-    </div>
-    <div id="week3-pie">
-      <div id="demo-pie-3" class="pie-title-center" data-percent="<%= week3_success_rate(@habit.id)%>">
-        <span class="pie-value"></span>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-  <div class="week">
-    <strong><p>Week 1</p></strong>
+<div class="main_div_habit">
+  <h1 class="habit_page_title"><%= @habit.name %></h1>
+  <div class="margin_top_first_head profile_font">
+    <div class="week">
+      <strong><p class="week_subhead">Week 1</p></strong>
     <% calendar_today = (Date.today - @habit.start_date + 1).to_i
       output = ""
       @week1.each do |day|
@@ -290,12 +207,20 @@
         output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
       end
     %>
-    <%= output %>
-    <!-- <p>Success Rate: <span id="week1-success-rate"><%= week1_success_rate(@habit.id) %></span>%<p> -->
+      <%= output %>
+    </div>
+    <div class="habit-week-pie" id="week1-pie">
+      <div id="demo-pie-1" class="pie-title-center" data-percent="<%= week1_success_rate(@habit.id)%>">
+        <span class="pie-value"></span>
+        <p>Success Rate</p>
+      </div>
+    </div>
   </div>
+  <br>
 
-  <div class="week">
-    <strong><p>Week 2</p></strong>
+  <div class="profile_font middle_topic_margin">
+    <div class="week">
+      <strong><p class="week_subhead">Week 2</p></strong>
     <% calendar_today = (Date.today - @habit.start_date + 1).to_i
       output = ""
       @week2.each do |day|
@@ -316,12 +241,20 @@
         output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
       end
     %>
-    <%= output %>
-    <!-- <p>Success Rate: <span id="week2-success-rate"><%= week2_success_rate(@habit.id) %></span>%<p> -->
+      <%= output %>
+    </div>
+    <div class="habit-week-pie" id="week2-pie">
+      <div id="demo-pie-2" class="pie-title-center" data-percent="<%= week2_success_rate(@habit.id)%>">
+        <span class="pie-value"></span>
+        <p>Success Rate</p>
+      </div>
+    </div>
   </div>
+  <br>
 
-  <div class="week">
-    <strong><p>Week 3</p></strong>
+  <div class="profile_font">
+    <div class="week">
+      <strong><p class="week_subhead">Week 3</p></strong>
     <% calendar_today = (Date.today - @habit.start_date + 1).to_i
       output = ""
       @week3.each do |day|
@@ -342,23 +275,15 @@
         output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
       end
     %>
-    <%= output %>
-    <!-- <p>Success Rate: <span id="week3-success-rate"><%= week3_success_rate(@habit.id) %></span>%<p> -->
+      <%= output %>
+    </div>
+    <div class="habit-week-pie" id="week3-pie">
+      <div id="demo-pie-3" class="pie-title-center" data-percent="<%= week3_success_rate(@habit.id)%>">
+        <span class="pie-value"></span>
+        <p>Success Rate</p>
+      </div>
+    </div>
   </div>
 
-
-<% date_diff = (Date.today - @habit.start_date).to_i
-  if date_diff >= 21
-    delete_submit_value = "Delete from record"
-  elsif date_diff >= 0
-    delete_submit_value = "I give up"
-  else
-    delete_submit_value = "Forget it"
-  end
-%>
-<form method = "POST" action="/profile/delete">
-  <input type="hidden" name="habit_id" value="<%= @habit.id %>" />
-  <input type="submit" value="<%= delete_submit_value %>" />
-</form>
-<br>
-<a href="/profile">Back to profile page</a>
+  
+</div>

@@ -31,7 +31,7 @@ function validateForm() {
 <form id="add_habit" method="POST", action="/profile/decision">
 
   <q id="form_font">I, <%= session[:first_name] %> <%= session[:last_name] %>, would like to develop the habit of<br>
-    <input id="form_form1" type="text" name="habit_name" value="<%= if @habit_name; @habit_name; end %>"> starting 
+    <input id="form_form1" type="text" name="habit_name" placeholder="(Enter Habit Here)" value="<%= if @habit_name; @habit_name; end %>"> starting 
     <input id="form_form2" type="text" name="start_in_days" list="days" size="3">
     <datalist id="days">
       <option value="0">Today</option>
