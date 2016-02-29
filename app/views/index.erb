@@ -1,18 +1,42 @@
 <div class="main_page">
 <%= erb :show_flash %>
+<% # DJ Khaled Random Inspirational Quote Generator
+  choose = rand(7)
+  case choose
+  when 0
+    quote = "Quality is not an act. It is a habit."
+  when 1
+    quote = "We become what we repeatedly do."
+  when 2
+    quote = "We first make our habits, and then they make us."
+  when 3
+    quote = "We first make our habits, and then they make us."
+  when 4
+    quote = "Motivation gets you started. Habit keeps you going."
+  when 5
+    quote = "What are we but the sum total of our habits and lifestyle."
+  when 6
+    quote = "Happiness is a habit. Cultivate it."
+  end
+%>
+
   <img id="main_image" src= "/images/picjumbo.com_HNCK3988.jpg">
   <br><br><br><br>
   <div class="div_inline">
     <h1 id="main_title">Habit<br>Tracker</h1>
-    <h3 id="quote">A tool to facilitate good habits<br><q>We become what we repeatedly do</q></h3>
+    <h3 id="quote">A tool to facilitate good habits
+      <br>
+      <!-- <q>We become what we repeatedly do</q> -->
+      <q><%= quote %></q>
+    </h3>
   </div>
   <div class="div_inline">
     <form action="/profile/signin" method="post">
       <div class="login">
         <label for="email"></label>
-        <input type="text" placeholder="email" name="email" value="testuser@mail.com"><br>
+        <input type="text" placeholder="email" name="email" value="testuserlhl@yahoo.ca"><br>
         <label for="password"></label>
-        <input type="password" placeholder="password" name="password" value="password"><br>
+        <input type="password" placeholder="password" name="password" value="vagrantssh"><br>
         <input type="submit" value="Login">
         <br>
         <div class="copperplate">Don't have an account? <a class="main_signup" href="/signup">Sign up</a></div>

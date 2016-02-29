@@ -81,6 +81,31 @@ get '/' do
   erb :index
 end
 
+get '/testemail' do
+  # Pony.options = {
+  #   subject: "Hello World",
+  #   body: "All the Best from the Habit Tracker Team.",
+    # via: :smtp,
+    # via_options: {
+    #   address:              'smtp.gmail.com',
+    #   port:                 '587',
+    #   enable_starttls_auto: true,
+    #   user_name:            'habit.tracker.mailer@gmail.com',
+    #   password:             'web-van-feb2016',
+    #   authentication:       :login,
+    #   domain:               'gmail.com'
+    # }
+  # }
+  Pony.mail(
+    to: 'zhengyuchao@yahoo.ca',
+    subject: 'Hello World',
+    html_body: '<h1>Test Email</h1>
+                <h4 style="color:red;">Habit Tracker Test<h4>',
+    body: "Test Email (non-html version in case you can't read html body)"
+  )
+  redirect '/'
+end
+
 get '/form' do
   repopulate_habit_name
   erb :form
@@ -154,6 +179,23 @@ post '/profile/decision' do
       )
       @habit.save
       create_21_days
+
+      @user = User.find_by(id: session[:user_id])
+      Pony.mail(
+        to: @user.email,
+        subject: "#{@user.first_name}, you created a new habit - #{params[:habit_name]}",
+        html_body: "
+          <h2>You created a new habit - #{params[:habit_name]} :)</h2>
+          <p><a href=\"http://0.0.0.0:3000/habits/#{@habit.id}\">Goto #{params[:habit_name]}</a></p>
+          <p>&nbsp;</p>
+          <p style=\"font-style:italic;\">Sincerely,</p>
+          <p>The Habit Tracker Team</p>
+          ",
+        body: "
+          You created a new habit - #{params[:habit_name]} :)
+          Link: http://0.0.0.0:3000/habits/#{@habit.id}
+          "
+      )
       redirect "/profile"
     end
   end
@@ -161,6 +203,24 @@ end
 
 # CZ: deletes a profile given user_id, habit_id. called from profile.erb
 post '/profile/delete' do
+  @habit = Habit.find(params[:habit_id])
+  @user = User.find(session[:user_id])
+  Pony.mail(
+    to: @user.email,
+    subject: "#{@user.first_name}, you deleted an existing habit - #{@habit.name}",
+    html_body: "
+      <h2>You deleted a habit - #{@habit.name} :(</h2>
+      <p><a href=\"http://0.0.0.0:3000/profile\">Go commit to a new one!</a></p>
+      <p>&nbsp;</p>
+      <p style=\"font-style:italic;\">Sincerely,</p>
+      <p>The Habit Tracker Team</p>
+      ",
+    body: "
+      You deleted a habit - #{@habit.name} :(
+      Link: http://0.0.0.0:3000/profile
+      "
+  )
+  #CZ: todo - DRY this code out
   Habit.where(user_id: session[:user_id]).where(id: params[:habit_id]).destroy_all
   redirect "/profile"
 end
@@ -195,6 +255,32 @@ post '/profile/signup' do
     )
   if @user    # user not falsey
     @user.save
+    Pony.mail(
+      to: @user.email,
+      subject: "Welcome to Habit Tracker, #{@user.first_name}!",
+      html_body: "
+        <h1>Welcome to Habit Tracker!</h1>
+        <p><span style=\"font-weight:bold;\">#{@user.first_name}</span>, you smart! We appreciate you!</p>
+        <p style=\"color:blue;\">We wish you all the best in your journey of building new habits.</p>
+        <p>&nbsp;</p>
+        <p><a href=\"http://0.0.0.0:3000/\">Go to my Habit Tracker profile</a></p>
+        <p>&nbsp;</p>
+        <p style=\"font-style:italic;\">Sincerely,</p>
+        <p>The Habit Tracker Team</p>
+        ",
+      body: "
+        Welcome to Habit Tracker!
+
+        http://0.0.0.0:3000/ - Go to my Habit Tracker profile
+
+        We wish you all the best in your journey of building new habits.
+        You smart! We appreciate you!
+
+        Sincerely,
+        The Habit Tracker Team
+        "
+    )
+    session[:flash] = "Welcome to Habit Tracker! A confirmation email has been sent and will arrive shortly."
     redirect '/'
   else
     redirect '/signup'
