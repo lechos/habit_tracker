@@ -137,10 +137,10 @@ post '/profile/decision' do
       session[:flash] = "Start in days can not be empty."
       session[:habit_name] = params[:habit_name]
       redirect "/form"
-    elsif positive_integer?(params[:start_in_days]) == false
-      session[:flash] = "Start in days must be a positive whole number."
-      session[:habit_name] = params[:habit_name]
-      redirect "/form"
+    # elsif positive_integer?(params[:start_in_days]) == false
+    #   session[:flash] = "Start in days must be a positive whole number."
+    #   session[:habit_name] = params[:habit_name]
+    #   redirect "/form"
     else
       @habit = Habit.new(
         name: params[:habit_name],

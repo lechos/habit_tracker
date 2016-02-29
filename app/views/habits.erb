@@ -13,17 +13,15 @@
                                     not supported by any browser */
   }
 
-  .week span {
-    cursor: pointer;
-  }
-
   .toggle-today {
     color:yellow;
+    cursor: pointer;
     font-weight: bold;
   }
 
   .toggle-day-red {
     background-color:red;
+    cursor: pointer;
   }
   .toggle-day-red.red {
     background-color:red;
@@ -34,6 +32,7 @@
 
   .toggle-day-green {
     background-color:green;
+    cursor: pointer;
   }
   .toggle-day-green.red {
     background-color:red;
@@ -44,86 +43,95 @@
 
   .toggle-day-gray {
     background-color:gray;
+    cursor: default;
   }
+
 </style>
 <script src="/javascript/pie-chart.js" type="text/javascript"></script>
 <script type="text/javascript">
 
-    $(document).ready(function () {
-      //draws circle and %
-        $('#demo-pie-1').pieChart({ //draws circle even with empty function
-            barColor: '#3bb2d0',
-            trackColor: '#eee',
-            lineCap: 'round',
-            lineWidth: 8,
-            onStep: function (from, to, percent) {    //draws %
-                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-            }
-        });
+  $(document).ready(function () {
 
-        $('#demo-pie-2').pieChart({
-            barColor: '#fbb03b',
-            trackColor: '#eee',
-            lineCap: 'butt',
-            lineWidth: 8,
-            onStep: function (from, to, percent) {
-                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-            }
-        });
-
-        $('#demo-pie-3').pieChart({
-            barColor: '#ed6498',
-            trackColor: '#eee',
-            lineCap: 'square',
-            lineWidth: 8,
-            onStep: function (from, to, percent) {
-                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-            }
-        });
- 
-    });
-
-    function updateSuccessRate(day_id, val) {
-
-      if(day_id <= 7) {
-        $id = $("#week1_success_rate");
-        $pie_id = $("#demo-pie-1");
-      }
-      else if(day_id <= 14) {
-        $id = $("#week2_success_rate");
-        $pie_id = $("#demo-pie-2");
-      }
-      else if(day_id <= 21) {
-        $id = $("#week2_success_rate");
-        $pie_id = $("#demo-pie-3");
-      }
-
-      if(val == "T") {
-        success_rate = (parseFloat($id.html()) + 14.3).toFixed(1);
-      }
-      else {
-        success_rate = (parseFloat($id.html()) - 14.3).toFixed(1);
-      }
+  //Calculates new success rate, given current success rate and "T"/"F" value
+  //(updates span) - todo remove
+    function calculateSuccessRate($obj, val) {
+      if(val == "T") success_rate = (parseFloat($obj.attr('data-percent')) + 14.3).toFixed(1);
+      else success_rate = (parseFloat($obj.attr('data-percent')) - 14.3).toFixed(1);
 
       if(success_rate < 0) success_rate = 0;
       if(success_rate > 100) success_rate = 100;
 
-      $id.html(success_rate); //works
-      //$pie_id.data-percent = success_rate;
-      //$pie_id.attr("pie-value",50);
+      return success_rate;
+    }
 
-      $('#demo-pie-1').pieChart({ //draws circle even with empty function
-          barColor: '#3bb2d0',
+  //Updates pie charts
+  //Called from updateDay \ ajax request is successful
+    function updateSuccessRate(day_id, val) {
+
+    //draw pie charts for weeks 1, 2, or 3
+      if(day_id <= 7) {
+        success_rate = calculateSuccessRate($("#demo-pie-1"), val);
+      //temporarily remove pie charts for the week to be updated
+        $pie = $pie1;
+        $("#demo-pie-1 canvas").remove();
+        $pie1.remove();
+      //draw updated piechart
+        $pie.attr("data-percent", success_rate);
+        $pie.pieChart({ //draws circle even with empty function
+          barColor: '#fbb03b',  //3bb2d0
           trackColor: '#eee',
           lineCap: 'round',
           lineWidth: 8,
           onStep: function (from, to, percent) {    //draws %
-              $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+            $(this.element).find('.pie-value').text(Math.round(percent) + '%');
           }
-      });
-
+        });
+      //append updated piechart
+        $pie1 = $pie;
+        $pie1.appendTo("#week1-pie");
+      }
+      else if(day_id <= 14) {
+        success_rate = calculateSuccessRate($("#demo-pie-2"), val);
+        $pie = $pie2;
+        $("#demo-pie-2 canvas").remove();
+        $pie2.remove();
+        $pie.attr("data-percent", success_rate);
+        $pie2.pieChart({
+            barColor: '#fbb03b',
+            trackColor: '#eee',
+            lineCap: 'round',
+            lineWidth: 8,
+            onStep: function (from, to, percent) {
+                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+            }
+        });
+        $pie2 = $pie;
+        $pie2.appendTo("#week2-pie");
+      }
+      else if(day_id <= 21) {
+        success_rate = calculateSuccessRate($("#demo-pie-3"), val);
+        $pie = $pie3;
+        $("#demo-pie-3 canvas").remove();
+        $pie3.remove();
+        $pie.attr("data-percent", success_rate);
+        $pie3.pieChart({
+            barColor: '#fbb03b',    //ed6498
+            trackColor: '#eee',
+            lineCap: 'round',
+            lineWidth: 8,
+            onStep: function (from, to, percent) {
+                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+            }
+        });
+        $pie3 = $pie;
+        $pie3.appendTo("#week3-pie");
+      }
+    
     }
 
+  //Updates the value of a clicked day
+  //passes habit id, day id, and "T"/"F" value to /update_day action
+  //if successful, calls updateSuccessRate to update the pie charts
     function updateDay(day_id, val) {
       //str = "/echo/js/?js=<h2>" + val + "</h2>";
       str = "/update_day";
@@ -135,40 +143,74 @@
           result: val
         },
         complete: function(response) {
-          //$('#output' + day_id).html(day_id+val);
+          //$('#output' + day_id).html(day_id+val);   //testing
           updateSuccessRate(day_id, val);
         }
       });
       return false;
     }
 
-    $(document).ready(function(){
-      $(".toggle-day-red").on('click', function() {
-        id = $(this).attr('id');
-        if ($(this).hasClass('green')) {
-            $(this).removeClass('green').addClass('red');
-            updateDay(id, "F");
+  //Draws circle and %
+    $pie1 = $('#demo-pie-1');
+    $pie1.pieChart({ //draws circle even with empty function
+        barColor: '#fbb03b',   //#3bb2d0
+        trackColor: '#eee',
+        lineCap: 'round',
+        lineWidth: 8,
+        onStep: function (from, to, percent) {    //draws %
+            $(this.element).find('.pie-value').text(Math.round(percent) + '%');
         }
-        else {
-            $(this).removeClass('red').addClass('green');
-            updateDay(id, "T");
-        }
-      });
     });
 
-    $(document).ready(function(){
-      $(".toggle-day-green").on('click', function() {
-        id = $(this).attr('id');
-        if ($(this).hasClass('red')) {
-            $(this).removeClass('red').addClass('green');
-            updateDay(id, "T");
+    $pie2 = $('#demo-pie-2');
+    $pie2.pieChart({
+        barColor: '#fbb03b',    //#fbb03b
+        trackColor: '#eee',
+        lineCap: 'round',
+        lineWidth: 8,
+        onStep: function (from, to, percent) {
+            $(this.element).find('.pie-value').text(Math.round(percent) + '%');
         }
-        else {
-            $(this).removeClass('green').addClass('red');
-            updateDay(id, "F");
-        }
-      });
     });
+
+    $pie3 = $('#demo-pie-3')
+    $pie3.pieChart({
+        barColor: '#fbb03b',    //#ed6498
+        trackColor: '#eee',
+        lineCap: 'round',
+        lineWidth: 8,
+        onStep: function (from, to, percent) {
+            $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+        }
+    });
+
+  //Changes color of day upon click
+  //calls updateDay
+    $(".toggle-day-red").on('click', function() {
+      id = $(this).attr('id');
+      if ($(this).hasClass('green')) {
+          $(this).removeClass('green').addClass('red');
+          updateDay(id, "F");
+      }
+      else {
+          $(this).removeClass('red').addClass('green');
+          updateDay(id, "T");
+      }
+    });
+
+    $(".toggle-day-green").on('click', function() {
+      id = $(this).attr('id');
+      if ($(this).hasClass('red')) {
+          $(this).removeClass('red').addClass('green');
+          updateDay(id, "T");
+      }
+      else {
+          $(this).removeClass('green').addClass('red');
+          updateDay(id, "F");
+      }
+    });
+
+  });
 
 </script>
 
@@ -193,7 +235,7 @@
       <h5>Week 1</h5>
       <label>Success Rate</label>
     </div>
-    <div>    
+    <div id="week1-pie">
       <div id="demo-pie-1" class="pie-title-center" data-percent="<%= week1_success_rate(@habit.id)%>">
         <span class="pie-value"></span>
       </div>
@@ -205,7 +247,7 @@
       <h5>Week 2</h5>
       <label>Success Rate</label>
     </div>
-    <div>    
+    <div id="week2-pie">
       <div id="demo-pie-2" class="pie-title-center" data-percent="<%= week2_success_rate(@habit.id)%>">
         <span class="pie-value"></span>
       </div>
@@ -217,7 +259,7 @@
       <h5>Week 3</h5>
       <label>Success Rate</label>
     </div>
-    <div>    
+    <div id="week3-pie">
       <div id="demo-pie-3" class="pie-title-center" data-percent="<%= week3_success_rate(@habit.id)%>">
         <span class="pie-value"></span>
       </div>
@@ -226,32 +268,30 @@
 
 </div>
 
-
-
   <div class="week">
     <strong><p>Week 1</p></strong>
     <% calendar_today = (Date.today - @habit.start_date + 1).to_i
       output = ""
       @week1.each do |day|
-        if day.position == calendar_today
+        if day.position == calendar_today     # current day - today
           span_class = "toggle-today"
           if day.result == "T"
             span_class += " toggle-day-green"
           else
-            span_class += " toggle-day-green"
+            span_class += " toggle-day-red"
           end
-        elsif day.position > calendar_today
+        elsif day.position > calendar_today   # future days - gray
           span_class = "toggle-day-gray"
-        elsif day.result == "T"
-          span_class = "toggle-day-green"
-        else  # assume day.result is not checked
+        elsif day.result == "T"               # past days "T" - green
+          span_class = "toggle-day-green"     
+        else                                  # assume day.result is not checked
           span_class = "toggle-day-red"
         end
         output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
       end
     %>
     <%= output %>
-    <p>Success Rate: <span id="week1_success_rate"><%= week1_success_rate(@habit.id) %></span>%<p>
+    <!-- <p>Success Rate: <span id="week1-success-rate"><%= week1_success_rate(@habit.id) %></span>%<p> -->
   </div>
 
   <div class="week">
@@ -259,20 +299,25 @@
     <% calendar_today = (Date.today - @habit.start_date + 1).to_i
       output = ""
       @week2.each do |day|
-        if day.position == calendar_today
+        if day.position == calendar_today     # current day - today
           span_class = "toggle-today"
-        elsif day.position > calendar_today
+          if day.result == "T"
+            span_class += " toggle-day-green"
+          else
+            span_class += " toggle-day-red"
+          end
+        elsif day.position > calendar_today   # future days - gray
           span_class = "toggle-day-gray"
-        elsif day.result == "T"
-          span_class = "toggle-day-green"
-        else  # assume day.result is not checked
+        elsif day.result == "T"               # past days "T" - green
+          span_class = "toggle-day-green"     
+        else                                  # assume day.result is not checked
           span_class = "toggle-day-red"
         end
         output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
       end
     %>
     <%= output %>
-    <p>Success Rate: <span id="week2_success_rate"><%= week2_success_rate(@habit.id) %></span>%<p>
+    <!-- <p>Success Rate: <span id="week2-success-rate"><%= week2_success_rate(@habit.id) %></span>%<p> -->
   </div>
 
   <div class="week">
@@ -280,20 +325,25 @@
     <% calendar_today = (Date.today - @habit.start_date + 1).to_i
       output = ""
       @week3.each do |day|
-        if day.position == calendar_today
+        if day.position == calendar_today     # current day - today
           span_class = "toggle-today"
-        elsif day.position > calendar_today
+          if day.result == "T"
+            span_class += " toggle-day-green"
+          else
+            span_class += " toggle-day-red"
+          end
+        elsif day.position > calendar_today   # future days - gray
           span_class = "toggle-day-gray"
-        elsif day.result == "T"
-          span_class = "toggle-day-green"
-        else  # assume day.result is not checked
+        elsif day.result == "T"               # past days "T" - green
+          span_class = "toggle-day-green"     
+        else                                  # assume day.result is not checked
           span_class = "toggle-day-red"
         end
         output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
       end
     %>
     <%= output %>
-    <p>Success Rate: <span id="week3_success_rate"><%= week3_success_rate(@habit.id) %></span>%<p>
+    <!-- <p>Success Rate: <span id="week3-success-rate"><%= week3_success_rate(@habit.id) %></span>%<p> -->
   </div>
 
 
@@ -307,8 +357,8 @@
   end
 %>
 <form method = "POST" action="/profile/delete">
-  <input type="hidden" name="habit_id" value="<%= @habit.id %>">
-  <input type="submit" value="<%= delete_submit_value %>">
+  <input type="hidden" name="habit_id" value="<%= @habit.id %>" />
+  <input type="submit" value="<%= delete_submit_value %>" />
 </form>
 <br>
 <a href="/profile">Back to profile page</a>
