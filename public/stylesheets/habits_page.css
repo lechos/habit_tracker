@@ -1,8 +1,8 @@
 .week span {
   display: inline-block;
-  width: 70px;
-
-  /* NoSelect */
+  width: 7em;
+  height: 2em;
+  line-height: 35px;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
   -khtml-user-select: none;    /* Konqueror */
@@ -10,9 +10,7 @@
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;           /* non-prefixed version, currently
                                   not supported by any browser */
-}
-
-.week span {
+  text-align: center;
   cursor: pointer;
 }
 
@@ -22,27 +20,190 @@
 }
 
 .toggle-day-red {
-  background-color:red;
+  background-color: #d9534f;
+  border: 0 !important;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold !important;
+  border-radius: 10px;
+  transition: all, 50ms, ease;
+  text-shadow: 0px 1px 0px #c9302c;
+  box-shadow: 0px 6px 0px #c9302c;
+  font-size: 1.1em;
 }
+
+.toggle-day-red:hover {
+  border: 0;
+  -webkit-filter: brightness(120%);
+  box-shadow: 0px 4px 0px #A22824;
+  top:2px;
+  position:relative;
+}
+
+.toggle-day-red:active {
+  box-shadow: inset 0px 3px 0px #A22824;
+  position: relative;
+  outline: 0;
+  background-color: #d9534f;
+  border-color: #c9302c;
+  top: 6px;
+}
+
 .toggle-day-red.red {
-  background-color:red;
+  background-color: #d9534f;
+  border: 0 !important;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold !important;
+  border-radius: 10px;
+  transition: all, 50ms, ease;
+  text-shadow: 0px 1px 0px #c9302c;
+  box-shadow: 0px 6px 0px #c9302c;
+  font-size: 1.1em;
 }
+
+.toggle-day-red.red:hover {
+  border: 0;
+  -webkit-filter: brightness(120%);
+  box-shadow: 0px 4px 0px #A22824;
+  top:2px;
+  position:relative;
+}
+
+.toggle-day-red.red:active {
+  box-shadow: inset 0px 3px 0px #A22824;
+  position: relative;
+  outline: 0;
+  background-color: #d9534f;
+  border-color: #c9302c;
+  top: 6px;
+}
+
 .toggle-day-red.green {
-  background-color:green;
+  background-color: #5cb85c;
+  border: 0 !important;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold !important;
+  border-radius: 10px;
+  transition: all, 50ms, ease;
+  text-shadow: 0px 1px 0px #449d44;
+  box-shadow: 0px 6px 0px #449d44;
+  font-size: 1.1em;
+}
+
+.toggle-day-red.green:hover {
+  border: 0;
+  -webkit-filter: brightness(120%);
+  box-shadow: 0px 4px 0px #377337;
+  top:2px;
+  position:relative;
+}
+
+.toggle-day-red.green:active {
+  box-shadow: inset 0px 3px 0px #377337;
+  position: relative;
+  outline: 0;
+  background-color: #47a447;
+  border-color: #398439;
+  top: 6px;
 }
 
 .toggle-day-green {
-  background-color:green;
+  background-color: #5cb85c;
+  border: 0 !important;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold !important;
+  border-radius: 10px;
+  transition: all, 50ms, ease;
+  text-shadow: 0px 1px 0px #449d44;
+  box-shadow: 0px 6px 0px #449d44;
+  font-size: 1.1em;
 }
+
+.toggle-day-green:hover {
+  border: 0;
+  -webkit-filter: brightness(120%);
+  box-shadow: 0px 4px 0px #377337;
+  top:2px;
+  position:relative;
+}
+
+.toggle-day-green:active {
+  box-shadow: inset 0px 3px 0px #377337;
+  position: relative;
+  outline: 0;
+  background-color: #47a447;
+  border-color: #398439;
+  top: 6px;
+}
+
 .toggle-day-green.red {
-  background-color:red;
+  background-color: #d9534f;
+  border: 0 !important;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold !important;
+  border-radius: 10px;
+  transition: all, 50ms, ease;
+  text-shadow: 0px 1px 0px #c9302c;
+  box-shadow: 0px 6px 0px #c9302c;
+  font-size: 1.1em;
 }
+
+.toggle-day-green.red:hover {
+  border: 0;
+  -webkit-filter: brightness(120%);
+  box-shadow: 0px 4px 0px #A22824;
+  top:2px;
+  position:relative;
+}
+
+.toggle-day-green.red:active {
+  box-shadow: inset 0px 3px 0px #A22824;
+  position: relative;
+  outline: 0;
+  background-color: #d9534f;
+  border-color: #c9302c;
+  top: 6px;
+}
+
 .toggle-day-green.green {
-  background-color:green;
+  background-color: #5cb85c;
+  border: 0 !important;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold !important;
+  border-radius: 10px;
+  transition: all, 50ms, ease;
+  text-shadow: 0px 1px 0px #449d44;
+  box-shadow: 0px 6px 0px #449d44;
+  font-size: 1.1em;
+}
+
+.toggle-day-green.green:hover {
+  border: 0;
+  -webkit-filter: brightness(120%);
+  box-shadow: 0px 4px 0px #377337;
+  top:2px;
+  position:relative;
+}
+
+.toggle-day-green.green:active {
+  box-shadow: inset 0px 3px 0px #377337;
+  position: relative;
+  outline: 0;
+  background-color: #47a447;
+  border-color: #398439;
+  top: 6px;
 }
 
 .toggle-day-gray {
-  background-color:gray;
+  background-color: gray;
+  border: 0 !important;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold !important;
+  border-radius: 10px;
+  transition: all, 50ms, ease;
+  text-shadow: 0px 1px 0px #4C4C4C;
+  box-shadow: 0px 6px 0px #4E4E4E;
+  font-size: 1.1em;
+  cursor: default !important;
 }
 
 .side_pic {
@@ -56,21 +217,21 @@
   z-index: -15;
 }
 
-.habit_title {
-  font-size: 2.6em;
+.habit_page_title {
+  font-size: 4em;
   color: white;
-  font-family: diavlo;
+  font-family: copperplate;
 }
 
 #habit_image {
   z-index: -1;
   position: fixed;
-  top: 0;
-  left: 20.31%;
+  top: -1%;
+  left: 20.1%;
   margin: auto;
-  width: 80%;
+  width: 81%;
   height: 120%;
-  -webkit-filter: blur(1px) opacity(80%) brightness(40%);;
+  -webkit-filter: blur(3px) opacity(95%) brightness(40%);
 }
 
 .main_div_habit {
@@ -79,4 +240,82 @@
   position: absolute;
   color: white;
   text-align: left;
+  top: 5%;
+}
+
+.delete_button {
+  font-family: 'copperplate';
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em; 
+  background: transparent;
+  border: none;
+}
+
+.week {
+  display: inline-block;
+}
+
+.week_subhead {
+  font-size: 1.8em;
+  font-family: copperplate;
+}
+
+canvas {
+  width: 8em;
+  position: relative;
+  bottom: 1em;
+}
+
+#demo-pie-1 p {
+  position: relative;
+  top: 7.5em;
+  font-size: 1.4em;
+  font-family: copperplate;
+}
+
+#demo-pie-1 span {
+  position: relative;
+  bottom: -7.4em;
+  font-size: 1.2em;
+}
+
+#demo-pie-2 p {
+  position: relative;
+  top: 7.5em;
+  font-size: 1.4em;
+  font-family: copperplate;
+}
+
+#demo-pie-2 span {
+  position: relative;
+  bottom: -7.4em;
+  font-size: 1.2em;
+}
+
+#demo-pie-3 p {
+  position: relative;
+  top: 7.5em;
+  font-size: 1.4em;
+  font-family: copperplate;
+}
+
+#demo-pie-3 span {
+  position: relative;
+  bottom: -7.4em;
+  font-size: 1.2em;
+}
+
+.margin_top_first_head {
+  margin-top: 0em;
+}
+
+.profile_font {
+  font-family: copperplate;
+  margin-left: 7em;
+}
+
+.middle_topic_margin {
+  margin-bottom: -1em;
+  margin-top: -1em;
 }

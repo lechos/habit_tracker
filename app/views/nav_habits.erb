@@ -26,19 +26,10 @@
     
   </div>
   <br>
-    <div class="button -green"><a class="sign_out_a" href="/form">Create a New Habit</a></div>
+    <div class="button -green"><a class="sign_out_a" href="/form">Create New Habit</a></div>
     <div class="button -yellow"><a class="sign_out_a" href="/profile">Back to Profile Page</a></div>
-    <div class="button -salmon"><a class="sign_out_a" href="profile/signout">Delete current habit</a></div>
-    <% date_diff = (Date.today - @habit.start_date).to_i
-    if date_diff >= 21
-      delete_submit_value = "Delete from record"
-    elsif date_diff >= 0
-      delete_submit_value = "I give up"
-    else
-      delete_submit_value = "Forget it"
-    end %>
-  <form method = "POST" action="/profile/delete">
-    <input type="hidden" name="habit_id" value="<%= @habit.id %>">
-    <input type="submit" value="<%= delete_submit_value %>">
-  </form>
+    <form method = "POST" action="/profile/delete">
+      <input type="hidden" name="habit_id" value="<%= @habit.id %>">
+      <div class="button -salmon"><input class="delete_button" type="submit" value="Delete Current Habits"></div>
+    </form>
 </div>

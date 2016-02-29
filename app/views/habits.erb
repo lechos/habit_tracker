@@ -33,7 +33,7 @@
         $('#demo-pie-2').pieChart({
             barColor: '#fbb03b',
             trackColor: '#eee',
-            lineCap: 'butt',
+            lineCap: 'round',
             lineWidth: 8,
             onStep: function (from, to, percent) {
                 $(this.element).find('.pie-value').text(Math.round(percent) + '%');
@@ -43,7 +43,7 @@
         $('#demo-pie-3').pieChart({
             barColor: '#ed6498',
             trackColor: '#eee',
-            lineCap: 'square',
+            lineCap: 'round',
             lineWidth: 8,
             onStep: function (from, to, percent) {
                 $(this.element).find('.pie-value').text(Math.round(percent) + '%');
@@ -141,115 +141,94 @@
 
 </script>
 
-
-<!-- testing: -->
-<!-- <div id="output1">waiting for action</div>
-<div id="output2">waiting for action</div>
-<div id="output3">waiting for action</div>
-<div id="output4">waiting for action</div>
-<div id="output5">waiting for action</div>
-<div id="output6">waiting for action</div>
-<div id="output7">waiting for action</div> -->
-<!-- /testing -->
-
-
 <div class="main_div_habit">
-  <h1 class="habit-title"><%= @habit.name %></h1>
-  <div class="habit-week-pie">
-    <div>
-      <h5>Week 1</h5>
-      <label>Success Rate</label>
-    </div>
-    <div id="demo-pie-1" class="pie-title-center" data-percent="<%= week1_success_rate(@habit.id)%>">
-      <span class="pie-value"></span>
-    </div>
-  </div>
-
-  <div class="habit-week-pie2">
-    <div>
-      <h5>Week 2</h5>
-      <label>Success Rate</label>
-    </div>
-    <div id="demo-pie-2" class="pie-title-center" data-percent="<%= week2_success_rate(@habit.id)%>">
-      <span class="pie-value"></span>
-    </div>
-  </div>
-
-  <div class="habit-week-pie">
-    <div>
-      <h5>Week 3</h5>
-      <label>Success Rate</label>
-    </div>
-    <div id="demo-pie-3" class="pie-title-center" data-percent="<%= week3_success_rate(@habit.id)%>">
-      <span class="pie-value"></span>
-    </div>
-  </div>
-
-
-  <div class="week">
-    <strong><p>Week 1</p></strong>
-    <% calendar_today = (Date.today - @habit.start_date + 1).to_i
-      output = ""
-      @week1.each do |day|
-        if day.position == calendar_today
-          span_class = "toggle-today"
-          if day.result == "T"
-            span_class += " toggle-day-green"
-          else
-            span_class += " toggle-day-green"
+  <h1 class="habit_page_title"><%= @habit.name %></h1>
+  <div class="margin_top_first_head profile_font">
+    <div class="week">
+      <strong><p class="week_subhead">Week 1</p></strong>
+      <% calendar_today = (Date.today - @habit.start_date + 1).to_i
+        output = ""
+        @week1.each do |day|
+          if day.position == calendar_today
+            span_class = "toggle-today"
+            if day.result == "T"
+              span_class += " toggle-day-green"
+            else
+              span_class += " toggle-day-green"
+            end
+          elsif day.position > calendar_today
+            span_class = "toggle-day-gray"
+          elsif day.result == "T"
+            span_class = "toggle-day-green"
+          else  # assume day.result is not checked
+            span_class = "toggle-day-red"
           end
-        elsif day.position > calendar_today
-          span_class = "toggle-day-gray"
-        elsif day.result == "T"
-          span_class = "toggle-day-green"
-        else  # assume day.result is not checked
-          span_class = "toggle-day-red"
-        end
-        output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
-      end %>
-    <%= output %>
-    <p>Success Rate: <span id="week1_success_rate"><%= week1_success_rate(@habit.id) %></span>%</p>
+          output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
+        end %>
+      <%= output %>
+    </div>
+    <div class="habit-week-pie">
+      <div id="demo-pie-1" class="pie-title-center" data-percent="<%= week1_success_rate(@habit.id)%>">
+        <span class="pie-value"></span>
+        <p>Success Rate</p>
+      </div>
+    </div>
   </div>
+  <br>
 
-  <div class="week">
-    <strong><p>Week 2</p></strong>
-    <% calendar_today = (Date.today - @habit.start_date + 1).to_i
-      output = ""
-      @week2.each do |day|
-        if day.position == calendar_today
-          span_class = "toggle-today"
-        elsif day.position > calendar_today
-          span_class = "toggle-day-gray"
-        elsif day.result == "T"
-          span_class = "toggle-day-green"
-        else  # assume day.result is not checked
-          span_class = "toggle-day-red"
-        end
-        output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
-      end %>
-    <%= output %>
-    <p>Success Rate: <span id="week2_success_rate"><%= week2_success_rate(@habit.id) %></span>%</p>
+  <div class="profile_font middle_topic_margin">
+    <div class="week">
+      <strong><p class="week_subhead">Week 2</p></strong>
+      <% calendar_today = (Date.today - @habit.start_date + 1).to_i
+        output = ""
+        @week2.each do |day|
+          if day.position == calendar_today
+            span_class = "toggle-today"
+          elsif day.position > calendar_today
+            span_class = "toggle-day-gray"
+          elsif day.result == "T"
+            span_class = "toggle-day-green"
+          else  # assume day.result is not checked
+            span_class = "toggle-day-red"
+          end
+          output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
+        end %>
+      <%= output %>
+    </div>
+    <div class="habit-week-pie">
+      <div id="demo-pie-2" class="pie-title-center" data-percent="<%= week2_success_rate(@habit.id)%>">
+        <span class="pie-value"></span>
+        <p>Success Rate</p>
+      </div>
+    </div>
   </div>
+  <br>
 
-  <div class="week">
-    <strong><p>Week 3</p></strong>
-    <% calendar_today = (Date.today - @habit.start_date + 1).to_i
-      output = ""
-      @week3.each do |day|
-        if day.position == calendar_today
-          span_class = "toggle-today"
-        elsif day.position > calendar_today
-          span_class = "toggle-day-gray"
-        elsif day.result == "T"
-          span_class = "toggle-day-green"
-        else  # assume day.result is not checked
-          span_class = "toggle-day-red"
-        end
-        output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
-      end %>
-    <%= output %>
-    <p>Success Rate: <span id="week3_success_rate"><%= week3_success_rate(@habit.id) %></span>%</p>
+  <div class="profile_font">
+    <div class="week">
+      <strong><p class="week_subhead">Week 3</p></strong>
+      <% calendar_today = (Date.today - @habit.start_date + 1).to_i
+        output = ""
+        @week3.each do |day|
+          if day.position == calendar_today
+            span_class = "toggle-today"
+          elsif day.position > calendar_today
+            span_class = "toggle-day-gray"
+          elsif day.result == "T"
+            span_class = "toggle-day-green"
+          else  # assume day.result is not checked
+            span_class = "toggle-day-red"
+          end
+          output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
+        end %>
+      <%= output %>
+    </div>
+    <div class="habit-week-pie">
+      <div id="demo-pie-3" class="pie-title-center" data-percent="<%= week3_success_rate(@habit.id)%>">
+        <span class="pie-value"></span>
+        <p>Success Rate</p>
+      </div>
+    </div>
   </div>
-
   
 </div>
