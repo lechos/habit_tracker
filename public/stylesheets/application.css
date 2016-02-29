@@ -496,7 +496,7 @@
   text-align: left;
   margin-left: 7%;
   margin-bottom: 0px;
-  margin-top: 12%;
+  margin-top: 15%;
 }
 
 .profile_name {
@@ -505,7 +505,7 @@
   color: rgb(0, 0, 0);
   margin-top: 2%;
   text-align: right;
-  margin-right: 7%;
+  margin-right: 9%;
 }
 
 .tool_link_back {
@@ -541,7 +541,7 @@
 
 .profile_title {
   font-size: 6.2em;
-  margin-top: 35px;
+  margin-top: 0.5em;
   text-align: left;
   margin-left: 20px;
   font-family: 'diavlo';
@@ -578,7 +578,7 @@
   margin: 0 auto;
   padding: 1em;
   position: fixed;
-  bottom: 20px;
+  bottom: 1.5em;
   left: 2px;
   font-family: diavlo_light;
 }
