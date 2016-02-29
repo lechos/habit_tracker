@@ -652,3 +652,11 @@
   font-size: 2.2em;
   font-family: diavlo;
 }
+
+.profile_delete {
+  color: red;
+  border: none;
+  background: transparent;
+  font-size: 1em;
+
+}

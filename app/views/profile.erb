@@ -33,8 +33,11 @@
                   </ul>
                 </div>
                 <div class="tool_link_back">
-                  <a href="/habits/<%= habit.id %>"><div class="tool_link" style="color:#ff8f00">Detail</div></a>
-                  <div class="tool_link" style="color:red;">Delete</div>
+                  <form method = "POST" action="/profile/delete">
+                    <a href="/habits/<%= habit.id %>"><div class="tool_link" style="color:#ff8f00">Detail</div></a>
+                    <input type="hidden" value="<%= habit.id %>" name="habit_id" />
+                    <div class="tool_link" style="color:red;"><input class="tool_link profile_delete" style="color:red;" type="submit" value="Delete"></div>
+                  </form>
                 </div>
               </div>
             <% end %>
@@ -66,8 +69,11 @@
                 </ul>
               </div>
               <div class="tool_link_back">
-                <a href="/habits/<%= habit.id %>"><div class="tool_link" style="color:#ff8f00">Detail</div></a>
-                <div class="tool_link" style="color:red;">Delete</div>
+                <form method = "POST" action="/profile/delete">
+                  <a href="/habits/<%= habit.id %>"><div class="tool_link" style="color:#ff8f00">Detail</div></a>
+                  <input type="hidden" value="<%= habit.id %>" name="habit_id" />
+                  <div class="tool_link" style="color:red;"><input class="tool_link profile_delete" style="color:red;" type="submit" value="Delete"></div>
+                </form>
               </div>
             </div>
           <% end %>
@@ -97,8 +103,11 @@
                 </ul>
               </div>
               <div class="tool_link_back">
-                <a href="/habits/<%= habit.id %>"><div class="tool_link" style="color:#ff8f00">Detail</div></a>
-                <div class="tool_link" style="color:red;">Delete</div>
+                <form method = "POST" action="/profile/delete">
+                  <a href="/habits/<%= habit.id %>"><div class="tool_link" style="color:#ff8f00">Detail</div></a>
+                  <input type="hidden" value="<%= habit.id %>" name="habit_id" />
+                  <div class="tool_link" style="color:red;"><input class="tool_link profile_delete" style="color:red;" type="submit" value="Delete"></div>
+                </form>
               </div>
             </div>
           <% end %>
