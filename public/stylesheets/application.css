@@ -51,6 +51,10 @@
   color: #FFFFFF;
 }
 
+.button.-salmon:hover {
+    background: #D45857;
+}
+
 .button.-green {
   background: #3ac569;
   color: #FFFFFF;
@@ -58,10 +62,26 @@
   margin-top: 50px;
 }
 
+.button.-green:hover {
+    background: #319854;
+}
+
+input#form_form3:hover {
+    cursor: pointer;
+}
+
+input#form_form4:hover {
+    cursor: pointer;
+}
+
 .button.-yellow {
   background: #E2D822;
   color: #FFFFFF;
   margin-bottom: 7px;
+}
+
+.button.-yellow:hover {
+    background: #C5BD1D;
 }
 
 .profile_nav {
@@ -189,7 +209,7 @@
 }
 
 #form_background {
-  background-color: #3F3D3E;
+  background-color: #484647;
   width: 150%;
   height: 110%;
   margin-top: -101px;
