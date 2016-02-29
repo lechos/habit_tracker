@@ -190,7 +190,9 @@
     <% calendar_today = (Date.today - @habit.start_date + 1).to_i
       output = ""
       @week1.each do |day|
+        date = "Day #{day.position}"
         if day.position == calendar_today     # current day - today
+          date = "Today"
           span_class = "toggle-today"
           if day.result == "T"
             span_class += " toggle-day-green"
@@ -204,7 +206,7 @@
         else                                  # assume day.result is not checked
           span_class = "toggle-day-red"
         end
-        output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
+        output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">#{date}</span>\n"
       end
     %>
       <%= output %>
@@ -224,7 +226,9 @@
     <% calendar_today = (Date.today - @habit.start_date + 1).to_i
       output = ""
       @week2.each do |day|
+        date = "Day #{day.position}"
         if day.position == calendar_today     # current day - today
+          date = "Today"
           span_class = "toggle-today"
           if day.result == "T"
             span_class += " toggle-day-green"
@@ -238,7 +242,7 @@
         else                                  # assume day.result is not checked
           span_class = "toggle-day-red"
         end
-        output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
+        output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">#{date}</span>\n"
       end
     %>
       <%= output %>
@@ -258,7 +262,9 @@
     <% calendar_today = (Date.today - @habit.start_date + 1).to_i
       output = ""
       @week3.each do |day|
+        date = "Day #{day.position}"
         if day.position == calendar_today     # current day - today
+          date = "Today"
           span_class = "toggle-today"
           if day.result == "T"
             span_class += " toggle-day-green"
@@ -272,7 +278,7 @@
         else                                  # assume day.result is not checked
           span_class = "toggle-day-red"
         end
-        output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">Day #{day.position}</span>\n"
+        output += "<span name=\"#{day.position}\" id=\"#{day.position}\" value=\"#{day.result}\" class=\"#{span_class}\">#{date}</span>\n"
       end
     %>
       <%= output %>
@@ -285,5 +291,4 @@
     </div>
   </div>
 
-  
 </div>

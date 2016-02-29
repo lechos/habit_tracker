@@ -65,6 +65,11 @@ helpers do
     rate = number_success/7.0*100
     rate.round(1)
   end
+
+  def avg_success_rate(habit_id)
+    avg = (week1_success_rate(habit_id) + week2_success_rate(habit_id) + week3_success_rate(habit_id)) / 3
+    avg.round(1)
+  end
 end
 
 before do
