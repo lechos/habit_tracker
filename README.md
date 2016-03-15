@@ -1,10 +1,6 @@
 Habit Tracker App
 =============
 
-By Alvin Ahn
+Built by Chris Zheng, Alvin Ahn, and Linnea Saltel
 
-## Information
-
-- Used Ruby, HTML, CSS, ActiveRecord, Sinatra, JavaScript, Jquery
-- An app that tracks habits for 21 days. Focused more on front-end works.
-- https://habit-tracker-project.herokuapp.com/
+Used languages/technologies: JQuery, JavaScript, Ruby, CSS, ActivRecord, Sinatra
